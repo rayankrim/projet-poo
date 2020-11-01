@@ -1,5 +1,5 @@
 
-package Partie1;
+package td3;
 
 public class Addition extends OperationBinaire {
 
@@ -10,11 +10,7 @@ public class Addition extends OperationBinaire {
 
 	@Override
 	public double calculer() {
-		if (this.eaLeft instanceof VarSymbolique || this.eaRight instanceof VarSymbolique){
-			
-		}
-		return this.eaLeft.calculer() + this.eaRight.calculer();//(2+1)+(4+5)
-		
+		return this.eaLeft.calculer() + this.eaRight.calculer();
 	}
 
 	@Override

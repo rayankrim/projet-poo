@@ -1,4 +1,4 @@
-package Partie1;
+package td3;
 
 public final class ConstRationnelle implements ExpressionArithmetique {
 
@@ -38,7 +38,9 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 
 	@Override
 	public double calculer() {
-		return 0.0;
+		int a=  getNumerateur();
+        int b = getDenominateur();
+        return (double) a /b ;
 	}
 
 }

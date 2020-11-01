@@ -1,4 +1,4 @@
-package Partie1;
+package td3;
 
 public interface ExpressionArithmetique {
 	public ExpressionArithmetique simplifier();
