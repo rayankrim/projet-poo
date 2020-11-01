@@ -1,4 +1,4 @@
-package Partie1;
+package td3;
 
 public class Division extends OperationBinaire {
 
