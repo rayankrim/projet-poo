@@ -20,7 +20,6 @@ public class Cos extends OperationUnaire {
 		return false;
 	}
 
-	
 
 
 }

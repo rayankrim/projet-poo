@@ -1,17 +1,15 @@
 package projet;
 
-public class Cos extends OperationUnaire {
+public class Sin extends OperationUnaire {
 
-	public Cos(ExpressionArithmetique ea) {
+	public Sin(ExpressionArithmetique ea) {
 	super(ea);
-	
-
 	}
 	
 	@Override
 	public double calculer() {
 	
-		return Math.cos(this.ea.calculer());
+		return Math.sin(this.ea.calculer());
 	}
 
 	@Override
@@ -20,7 +18,6 @@ public class Cos extends OperationUnaire {
 		return false;
 	}
 
-	
 
 
 }
