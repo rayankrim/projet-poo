@@ -24,14 +24,21 @@ public class Multiplication extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer() {
-		return this.eaLeft.calculer() * this.eaRight.calculer();
+	public double calculer() throws VarSymboliqueException {
+		double approximation = this.eaLeft.calculer() * this.eaRight.calculer();
+
+		approximation = Math.round(approximation * 10000);
+
+		return approximation / 10000;
+
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
 		return this.simplifie(droite, gauche).simplifier();
 	}
-
-	
+	@Override
+	public String afficher() {
+		return eaLeft.afficher() + "*" + eaRight.afficher();
+	}
 }

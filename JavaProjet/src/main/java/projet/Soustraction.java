@@ -8,10 +8,14 @@ public class Soustraction extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer() {
-		
-		
-		return this.eaLeft.calculer() - this.eaRight.calculer();
+	public double calculer() throws VarSymboliqueException {
+
+		double approximation = this.eaLeft.calculer() - this.eaRight.calculer();
+
+		approximation = Math.round(approximation * 10000);
+
+		return approximation / 10000;
+
 	}
 
 	@Override
@@ -37,11 +41,13 @@ public class Soustraction extends OperationBinaire {
 		return new ConstRationnelle(droite.getDenominateur() * gauche.getEntier() - droite.getNumerateur() * 1,
 				1 * droite.getDenominateur()).simplifier();
 	}
+
 	@Override
 	public boolean egaliteAr(ExpressionArithmetique expr2) {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
-
+	@Override
+	public String afficher() {
+		return eaLeft.afficher() + "-" + eaRight.afficher();
+	}
 }

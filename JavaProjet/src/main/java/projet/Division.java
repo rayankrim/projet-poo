@@ -8,8 +8,13 @@ public class Division extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer() {
-		return this.eaLeft.calculer() / this.eaRight.calculer();
+	public double calculer() throws VarSymboliqueException {
+		double approximation = this.eaLeft.calculer() / this.eaRight.calculer();
+
+		approximation = Math.round(approximation * 10000);
+
+		return approximation / 10000;
+
 	}
 
 	@Override
@@ -37,5 +42,8 @@ public class Division extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ExpressionArithmetique droite) {
 		return this;
 	}
-
+	@Override
+	public String afficher() {
+		return eaLeft.afficher() + "/" + eaRight.afficher();
+	}
 }

@@ -9,8 +9,14 @@ public class Addition extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer() {
-		return this.eaLeft.calculer() + this.eaRight.calculer();
+	public double calculer() throws VarSymboliqueException {
+
+		double approximation = this.eaLeft.calculer() + this.eaRight.calculer();
+
+		approximation = Math.round(approximation * 10000);
+
+		return approximation / 10000;
+
 	}
 
 	@Override
@@ -31,9 +37,22 @@ public class Addition extends OperationBinaire {
 		return new ConstEntiere(gauche.getEntier() + droite.getEntier()).simplifier();
 	}
 
+	// @Override
+	// protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere
+	// droite) {
+	// return new (this.gauche.getVariable() + this.droite.getEntier()) ;
+	// }
+
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
+
 		return simplifie(droite, gauche).simplifier();
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VarSymbolique droite) {
+		// TODO Auto-generated method stub
+		return super.simplifie(gauche, droite);
 	}
 
 }

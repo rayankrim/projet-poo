@@ -3,42 +3,55 @@ package projet;
 import java.util.Map;
 import java.util.TreeMap;
 
+// import javax.swing.text.html.parser.ParserDelegator;
+
 public final class VarSymbolique implements ExpressionArithmetique {
 
-    private final char variable; 
+	private final String variable;
 
+	public VarSymbolique(String variable) {
+		Map<String, String> tableauAssociatifVarS = new TreeMap<>();
+		// Map<String, String> tableauAssociatifVarS = new TreeMap<String, String>();
+		tableauAssociatifVarS.put("x", "x");
+		tableauAssociatifVarS.put("y", "y");
+		tableauAssociatifVarS.put("z", "z");
+		this.variable = tableauAssociatifVarS.get(variable);
+	}
 
-    public VarSymbolique(char variable) {
-        Map<Character,Character> tableauAssociatifVarS = new TreeMap<Character,Character>();
-        tableauAssociatifVarS.put('x','x');
-        tableauAssociatifVarS.put('y','y');
-        tableauAssociatifVarS.put('z','z');
-        this.variable = tableauAssociatifVarS.get(variable);
-    }
+	public String getVariable() {
+		return this.variable;
+	}
 
+	@Override
+	public ExpressionArithmetique simplifier() {
+		return this;
+	}
 
-    public char getVariable() {
-        return this.variable;
-    }
+	@Override
+	public double calculer() throws VarSymboliqueException {
+		try {
+			throw new VarSymboliqueException();
 
+		} catch (Exception e) {
 
-    @Override
-    public ExpressionArithmetique simplifier() {
-        return this;
-    }
+			throw new VarSymboliqueException();
 
+		}
 
-    @Override
-    public double calculer() {
-        return 0;
-    }
+	}
 
+	// _______________ Why??? _______________________
+
+	// 	@Override
+	// public double calculer() {
+	// 	return Double.parseDouble(this.getVariable());
 
 	@Override
 	public boolean egaliteAr(ExpressionArithmetique expr2) {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
-
+	@Override
+	public String afficher() {
+		return this.variable;
+	}
 }

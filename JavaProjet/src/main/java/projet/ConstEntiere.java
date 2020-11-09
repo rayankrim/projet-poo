@@ -24,7 +24,10 @@ public final class ConstEntiere implements ExpressionArithmetique {
 
 	@Override
 	public boolean egaliteAr(ExpressionArithmetique expr2) {
-		// TODO Auto-generated method stub
 		return false;
+	}
+	@Override
+	public String afficher() {
+		return this.getEntier() + "";
 	}
 }
