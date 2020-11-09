@@ -14,8 +14,10 @@ public class Ln extends OperationUnaire {
 
 	@Override
 	public boolean egaliteAr(ExpressionArithmetique expr2) {
-		// TODO Auto-generated method stub
 		return false;
 	}
-
+	@Override
+	public String afficher() {
+		return "ln(" + ea.afficher() + ")";
+	}
 }

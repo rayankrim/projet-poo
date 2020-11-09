@@ -42,5 +42,8 @@ public class Division extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ExpressionArithmetique droite) {
 		return this;
 	}
-
+	@Override
+	public String afficher() {
+		return eaLeft.afficher() + "/" + eaRight.afficher();
+	}
 }

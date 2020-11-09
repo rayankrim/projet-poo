@@ -19,4 +19,10 @@ public class Exponentielle extends OperationUnaire {
 		return false;
 	}
 
+	@Override
+	public String afficher() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -43,4 +43,10 @@ public final class Pi implements ExpressionArithmetique {
 		return false;
 	}
 
+	@Override
+	public String afficher() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

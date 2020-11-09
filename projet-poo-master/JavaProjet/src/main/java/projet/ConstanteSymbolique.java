@@ -10,7 +10,7 @@ public final class ConstanteSymbolique implements ExpressionArithmetique {
 	public ConstanteSymbolique(String exponentielleOrPi) {
 
 		Map<String, Double> tableauAssociatif = new TreeMap<>();
-		tableauAssociatif.put("pi", 3.141592653);
+		tableauAssociatif.put("pi", 3.141592654);
 		tableauAssociatif.put("e", 2.71828182846);
 
 		this.exponentielleOrPi = tableauAssociatif.get(exponentielleOrPi);
@@ -44,4 +44,10 @@ public final class ConstanteSymbolique implements ExpressionArithmetique {
 		return false;
 	}
 
+	@Override
+	public String afficher() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

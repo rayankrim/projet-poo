@@ -52,5 +52,8 @@ public class Puissance extends OperationBinaire {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	@Override
+	public String afficher() {
+		return eaLeft.afficher() + "^" + eaRight.afficher();
+	}
 }

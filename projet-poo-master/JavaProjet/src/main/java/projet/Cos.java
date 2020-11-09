@@ -15,8 +15,10 @@ public class Cos extends OperationUnaire {
 
 	@Override
 	public boolean egaliteAr(ExpressionArithmetique expr2) {
-
 		return false;
 	}
-
+	@Override
+	public String afficher() {
+		return "cos(" + ea.afficher() + ")";
+	}
 }

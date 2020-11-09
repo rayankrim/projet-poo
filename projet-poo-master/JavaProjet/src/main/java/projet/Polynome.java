@@ -66,7 +66,7 @@ public class Polynome implements ExpressionArithmetique {
 
 	}
 
-	public void afficher() {
+	public void affiche() {
 
 		System.out.println("");
 
@@ -136,5 +136,11 @@ public class Polynome implements ExpressionArithmetique {
 	public boolean egaliteAr(ExpressionArithmetique expr2) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String afficher() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

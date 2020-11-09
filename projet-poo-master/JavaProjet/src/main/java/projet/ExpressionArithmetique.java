@@ -6,4 +6,5 @@ public interface ExpressionArithmetique {
 	public double calculer() throws VarSymboliqueException;
 
 	boolean egaliteAr(ExpressionArithmetique expr2);
+	public String afficher();
 }

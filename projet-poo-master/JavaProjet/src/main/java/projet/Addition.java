@@ -55,4 +55,11 @@ public class Addition extends OperationBinaire {
 		return super.simplifie(gauche, droite);
 	}
 
+	@Override
+	public String afficher() {
+		// TODO Auto-generated method stub
+		return null;
+		
+	}
+
 }

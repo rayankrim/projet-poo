@@ -23,6 +23,8 @@ import projet.ConstanteSymbolique;
 import projet.Soustraction;
 import projet.VarSymbolique;
 import projet.VarSymboliqueException;
+import projet.RacineCarre;
+
 
 /**
  * Unit test for simple App.
@@ -45,6 +47,7 @@ public class AppTest {
 
 		// Réels
 		ExpressionArithmetique zero = new ConstEntiere(0);
+		ExpressionArithmetique un = new ConstEntiere(1);
 		ExpressionArithmetique neuf = new ConstEntiere(9);
 		ExpressionArithmetique deux = new ConstEntiere(2);
 		ExpressionArithmetique trois = new ConstEntiere(3);
@@ -81,13 +84,22 @@ public class AppTest {
 		assertEquals(550, ((ConstRationnelle) times.simplifier()).getNumerateur());
 		assertEquals(17, ((ConstRationnelle) times.simplifier()).getDenominateur());
 
-		// Racine carré
+
+		// Racine carré de 4
+		ExpressionArithmetique quatre = new ConstEntiere(4);
+		ExpressionArithmetique testRaC = new RacineCarre(quatre);
+		assertEquals(2.0, testRaC.calculer(), 1);
+
+		System.out.println("RacineCarre de 4 = " + testRaC.calculer());
 
 		// Cosinus & Sinus
 		ExpressionArithmetique cosinus = new Cos(cr);
 		ExpressionArithmetique sinus = new Sin(deux);
 		// assertEquals(-0.9899924966004454, cosinus.calculer(), 0.0001);
 		assertEquals(0.9092974268256817, sinus.calculer(), 0.0001);
+
+		//System.out.println("cos(1/17) = " + cosinus.calculer());
+
 		// System.out.println(cr.calculer());
 		// System.out.println(cosinus.calculer());
 
@@ -120,7 +132,7 @@ public class AppTest {
 		// test 1 + pi
 
 		ExpressionArithmetique piAddition = new Pi("pi");
-		ExpressionArithmetique un = new ConstEntiere(1);
+		
 
 		ExpressionArithmetique additionPietUn = new Addition(piAddition, un);
 
@@ -145,9 +157,15 @@ public class AppTest {
 
 		ExpressionArithmetique ln1 = new Ln(un);
 		ExpressionArithmetique additionlnEtUn = new Addition(un, ln1);
+		assertEquals(1.0, additionlnEtUn.calculer(), 1);
+		System.out.println("Ln(1) +  1 = " + additionlnEtUn.calculer());
 
-		System.out.println("Ln +  1 = " + additionlnEtUn.calculer());
+		// x*1
+		ExpressionArithmetique UnX = new Multiplication(un, vs);
+		// System.out.println("1*x = "+ UnX.calculer());
 
+		// afficher une expression arithmetique
+		//System.out.println(testadd.afficher());
 		// test 1 + e^0
 
 		// premier test, je dois faire l'exponentielle first
@@ -159,6 +177,12 @@ public class AppTest {
 		ExpressionArithmetique expoAndOne = new Addition(un, expo);
 		System.out.println("Expo 0  + 1" + expoAndOne.calculer());
 
+		/*
+		 * VarSymbolique vr = new VarSymbolique('x'); vr.setValeur(new ConstEntiere(9));
+		 * // x = 9 VarSymbolique oui = (VaSymbolique)vr.simplifier();
+		 * System.out.println(oui.getVariable());
+		 */
+
 		// test : 1 + Sin(pi/2)
 
 		ExpressionArithmetique PiParDeux = new Division(pi, deux);
@@ -166,6 +190,7 @@ public class AppTest {
 		ExpressionArithmetique SinOfPiParDeux = new Sin(PiParDeux);
 		System.out.println("test : Sin(pi/2)  " + SinOfPiParDeux.calculer());
 		ExpressionArithmetique UnPlusSinOfPiParDeux = new Addition(un, SinOfPiParDeux);
+		//assertEquals(2.0, testadd.calculer(), 1);
 		System.out.println("test : 1 + Sin(pi/2)  " + UnPlusSinOfPiParDeux.calculer());
 
 		// test Polynome
@@ -186,6 +211,25 @@ public class AppTest {
 		poly.afficher();
 		poly2.afficher();
 		poly3.afficher();
+		
+		
+		//test loic question 8 
+		
+		ExpressionArithmetique x = new VarSymbolique("x");
+		ExpressionArithmetique y = new VarSymbolique("y");
+		VarSymbolique Y = (VarSymbolique) y;
+		ConstEntiere Un= (ConstEntiere) un;
+		Y.modifierVariable(Un.getEntier());
+		VarSymbolique X = (VarSymbolique) x;
+		X.modifierVariable(Un.getEntier());
+		ExpressionArithmetique noeud1 = new Addition(Y,un);
+		ExpressionArithmetique noeud2 = new Division(X,noeud1);
+		ExpressionArithmetique noeud3 = new Addition(un,noeud2);
+		
+		double n = noeud3.calculer();
+		Object N = (Object) n;
+		
+		assertEquals(1.5, N);
 
 	}
 
@@ -206,8 +250,22 @@ public class AppTest {
 		ExpressionArithmetique results = new ConstRationnelle(550, 17);
 
 		ExpressionArithmetique divide = new Division(six, cr);
+		ExpressionArithmetique pi = new ConstanteSymbolique("pi");
 
-		// egaliteAr A refaire :)
+		ExpressionArithmetique division = new Division(pi, trois);
+
+		// element neutre
+		//ExpressionArithmetique neutreDiv = new Division(trois, un);
+		//ExpressionArithmetique neutreMul = new Multiplication(trois, un);
+		//ExpressionArithmetique neutreAdd = new Addition(trois, un);
+		//ExpressionArithmetique neutreSous = new Soustraction(trois, un);
+
+		//assertEquals(3.0, neutreDiv.calculer(), 1);
+		//assertEquals(3.0, neutreAdd.calculer(), 1);
+		//assertEquals(3.0, neutreMul.calculer(), 1);
+		//assertEquals(3.0, neutreSous.calculer(), 1);
+
+		// egaliteAr à revoir !!! __________________
 
 		ExpressionArithmetique plus2 = new Addition(neuf, deux);
 
@@ -217,6 +275,8 @@ public class AppTest {
 		assertEquals(false, expression1.egaliteAr(expression2));
 
 		// System.out.println(divide.calculer());
+		// System.out.println(division.calculer());  ????
+
 
 	}
 }
