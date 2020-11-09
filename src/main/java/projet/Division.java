@@ -1,4 +1,4 @@
-package td3;
+package projet;
 
 public class Division extends OperationBinaire {
 
@@ -36,6 +36,11 @@ public class Division extends OperationBinaire {
 	@Override
 	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ExpressionArithmetique droite) {
 		return this;
+	}
+
+	@Override
+	public String afficher() {
+		return eaLeft.afficher() + "/" + eaRight.afficher();
 	}
 
 }

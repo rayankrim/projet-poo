@@ -1,4 +1,4 @@
-package td3;
+package projet;
 
 public class Soustraction extends OperationBinaire {
 
@@ -34,6 +34,16 @@ public class Soustraction extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
 		return new ConstRationnelle(droite.getDenominateur() * gauche.getEntier() - droite.getNumerateur() * 1,
 				1 * droite.getDenominateur()).simplifier();
+	}
+
+	@Override
+	public boolean egaliteAr(ExpressionArithmetique expr2) {
+		return false;
+	}
+
+	@Override
+	public String afficher() {
+		return eaLeft.afficher() + "-" + eaRight.afficher();
 	}
 
 }

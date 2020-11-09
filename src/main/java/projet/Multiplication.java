@@ -1,4 +1,4 @@
-package td3;
+package projet;
 
 public class Multiplication extends OperationBinaire {
 
@@ -31,6 +31,11 @@ public class Multiplication extends OperationBinaire {
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
 		return this.simplifie(droite, gauche).simplifier();
+	}
+
+	@Override
+	public String afficher() {
+		return eaLeft.afficher() + "*" + eaRight.afficher();
 	}
 
 }

@@ -1,4 +1,4 @@
-package td3;
+package projet;
 
 public final class ConstEntiere implements ExpressionArithmetique {
 
@@ -20,5 +20,15 @@ public final class ConstEntiere implements ExpressionArithmetique {
 	@Override
 	public double calculer() {
 		return this.getEntier();
+	}
+
+	@Override
+	public boolean egaliteAr(ExpressionArithmetique expr2) {
+		return false;
+	}
+
+	@Override
+	public String afficher() {
+		return this.getEntier() + "";
 	}
 }

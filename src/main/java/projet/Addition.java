@@ -1,5 +1,4 @@
-
-package td3;
+package projet;
 
 public class Addition extends OperationBinaire {
 
@@ -10,7 +9,13 @@ public class Addition extends OperationBinaire {
 
 	@Override
 	public double calculer() {
-		return this.eaLeft.calculer() + this.eaRight.calculer();
+
+		double approximation = this.eaLeft.calculer() + this.eaRight.calculer();
+
+		approximation = Math.round(approximation * 10000);
+
+		return approximation / 10000;
+
 	}
 
 	@Override
@@ -32,8 +37,20 @@ public class Addition extends OperationBinaire {
 	}
 
 	@Override
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
+		return new VarSymbolique(gauche.getVariable().simplifer()) + (droite.getEntier().simplifier());
+	}
+
+	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
+
 		return simplifie(droite, gauche).simplifier();
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VarSymbolique droite) {
+		// TODO Auto-generated method stub
+		return super.simplifie(gauche, droite);
 	}
 
 }
