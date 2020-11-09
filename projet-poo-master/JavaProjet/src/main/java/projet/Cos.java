@@ -9,7 +9,7 @@ public class Cos extends OperationUnaire {
 	}
 	
 	@Override
-	public double calculer() {
+	public double calculer() throws VarSymboliqueException {
 	
 		return Math.cos(this.ea.calculer());
 	}

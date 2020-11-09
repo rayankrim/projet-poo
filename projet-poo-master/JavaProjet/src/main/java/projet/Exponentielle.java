@@ -9,7 +9,7 @@ public class Exponentielle extends OperationUnaire {
 
 	
 	@Override
-	public double calculer() {
+	public double calculer() throws VarSymboliqueException {
 		
 		return Math.exp(this.ea.calculer());
 	}

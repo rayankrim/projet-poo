@@ -7,7 +7,7 @@ public class Ln extends OperationUnaire {
 	}
 	
 	@Override
-	public double calculer() {
+	public double calculer() throws VarSymboliqueException {
 		
 		return Math.log(this.ea.calculer());
 	}

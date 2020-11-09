@@ -28,6 +28,15 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
 		return this;
 	}
+	
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
+		return this;
+	}
+	protected ExpressionArithmetique simplifie( ConstEntiere gauche,VarSymbolique droite) {
+		return this;
+	}
+	
+	
 
 	@Override
 	public ExpressionArithmetique simplifier() {

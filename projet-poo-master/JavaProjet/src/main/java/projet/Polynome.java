@@ -10,140 +10,131 @@ public class Polynome implements ExpressionArithmetique {
 	private int[] fonctionDerivee = new int[10];
 	private int[] puissanceDerivee = new int[10];
 
-	private int x;
-	private int xDerivee;
-	private int Px;
-	private int PxDerivee;
 
-	Scanner sc = new Scanner(System.in);
+	
+	//contruscteur vide pr kinani 
+	
+	public Polynome() {
+		
+		
+		
+	}
+	
+	
 
 	// Constructeur de la classe Polynome
 
-	public Polynome(int nbMembre) {
+	public Polynome(int nbMembre, int fonction[], int puissance[]) {
+
 		this.nbMembre = nbMembre;
-		
-		/*
-		this.x=x; 
-		this.xDerivee=xDerivee;
-		this.Px=Px;
-		this.PxDerivee=PxDerivee;
-		*/
+
+		for (int i = 0; i < nbMembre; i++) {
+			this.fonction[i] = fonction[i];
+		}
+		for (int i = 0; i < nbMembre; i++) {
+			this.puissance[i] = puissance[i];
+		}
 
 	}
-
+	
+	
+	
 	public void derive() {
 
-		System.out.println("entrez les membres de la fonction");
-
-		for (int i = 0; i < this.nbMembre; i++) {
-			
-			
-			System.out.println("Entrez le terme n°" +(i+1)+":");
-			x = sc.nextInt();
-			fonction[i] = x;
-			System.out.println(fonction[i] + "^ ?"  );
-			Px = sc.nextInt();
-			puissance[i] = Px;
+		for (int i = 0; i < nbMembre; i++) {
 
 			// premier cas ou la puissance = 0
 
-			if (Px == 0) {
+			if (puissance[i] == 0) {
 
-				xDerivee = 0;
-				PxDerivee = 0;
-
-				fonctionDerivee[i] = xDerivee;
-				puissanceDerivee[i] = PxDerivee;
+				fonctionDerivee[i] = 0;
+				puissanceDerivee[i] = 0;
 
 			}
 
 			// second cas ou la puissance == 1
 
-			if (Px == 1) {
+			if (puissance[i] == 1) {
 
-				xDerivee = x;
-				PxDerivee = 0;
-
-				fonctionDerivee[i] = xDerivee;
-				puissanceDerivee[i] = PxDerivee;
+				fonctionDerivee[i] = fonction[i];
+				puissanceDerivee[i] = 0;
 
 			}
 
 			// dernier cas, Px > 1
 
-			if (Px > 1) {
+			if (puissance[i] > 1) {
 
-				xDerivee = x * Px;
-				PxDerivee = Px - 1;
-
-				fonctionDerivee[i] = xDerivee;
-				puissanceDerivee[i] = PxDerivee;
+				fonctionDerivee[i] = fonction[i] * puissance[i];
+				puissanceDerivee[i] = puissance[i] - 1;
 
 			}
 
 		}
+		
+		
+	}
+	
+	public void afficher() {
 
-		System.out.print("affichage de la fonction : ");
+		System.out.println("");
 
-		for (int i = 0; i < nbMembre; i++) {
+		System.out.print("affiche de la fonction : ");
 
-			if (fonction[i] > 0) {
-				System.out.print(fonction[i]);
+		// affichage
+
+		for (int i1 = 0; i1 < nbMembre; i1++) {
+
+			if (fonction[i1] == 0) {
+				System.out.print(fonction[i1]);
 			}
 
-			if (puissance[i] == 1) {
+			if (fonction[i1] > 0) {
+				System.out.print(fonction[i1]);
+			}
+
+			if (puissance[i1] == 1) {
 				System.out.print("x ");
 
 			}
 
-			if (puissance[i] > 1) {
-				System.out.print("x^" + puissance[i]);
+			if (puissance[i1] > 1) {
+				System.out.print("x^" + puissance[i1]);
 
 			}
 
-			if (i != nbMembre - 1) {
+			if (i1 != nbMembre - 1) {
 				System.out.print(" + ");
 			}
 
 		}
-		System.out.println(" ");
 
-		System.out.print("affichage de sa dérivée : ");
-
-		for (int i = 0; i < nbMembre; i++) {
-
-			if (fonctionDerivee[i] > 0) {
-				System.out.print(fonctionDerivee[i]);
-			}
-
-			if (puissanceDerivee[i] == 1) {
-				System.out.print("x ");
-
-			}
-
-			if (puissanceDerivee[i] > 1) {
-				System.out.print("x^" + puissanceDerivee[i]);
-
-			}
-
-			if (puissanceDerivee[i] != 0) {
-				if (i != nbMembre - 1) {
-					System.out.print(" + ");
-				}
-
-			}
-
-		}
+		
 
 	}
-/*
-	public static void main(String[] args) {
 
-		Polynome poly = new Polynome(3);
-		poly.derive();
-
+	public Polynome getFonctionDerivee(){
+		
+	
+		Polynome poly = new Polynome(this.nbMembre,this.fonctionDerivee,this.puissanceDerivee);
+		
+		return poly; 
+		
+		
+		
+	}
+	
+	/*
+	public void auto() {
+		
+		System.out.println("tu veux deriver cb de fois? ");
+		
+		for()
+			.derive();
+		
 	}
 */
+	
 
 	@Override
 	public ExpressionArithmetique simplifier() {

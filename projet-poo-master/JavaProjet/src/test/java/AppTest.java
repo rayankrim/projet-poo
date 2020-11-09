@@ -51,6 +51,7 @@ public class AppTest {
 
 		// Variable Symbolique
 		ExpressionArithmetique vs = new VarSymbolique('x');
+		
 		assertEquals('x', ((VarSymbolique) vs.simplifier()).getVariable());
 
 		// Opération de base
@@ -140,9 +141,27 @@ public class AppTest {
 		
 		
 		// test Polynome 
+		int[] tab = {3,5,10};
+		int[] tab2 = {2,1,0};
 		
-		Polynome poly = new Polynome(4);
+		
+		Polynome poly = new Polynome(3,tab, tab2);
 		poly.derive();
+		
+		Polynome poly2 = new Polynome(); 
+		poly2=poly.getFonctionDerivee();
+		
+		poly2.derive();
+		
+		Polynome poly3 = new Polynome(); 
+		poly3=poly2.getFonctionDerivee();
+		
+		
+		
+		poly.afficher();
+		poly2.afficher();
+		poly3.afficher();
+		
 		
 		
 	}

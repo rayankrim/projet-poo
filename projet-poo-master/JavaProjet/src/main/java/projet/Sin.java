@@ -7,7 +7,7 @@ public class Sin extends OperationUnaire {
 	}
 	
 	@Override
-	public double calculer() {
+	public double calculer() throws VarSymboliqueException {
 	
 		return Math.sin(this.ea.calculer());
 	}

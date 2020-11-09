@@ -6,7 +6,7 @@ public class Puissance extends OperationBinaire {
         super(x,n);
         }
 
-    public double calculer() {
+    public double calculer() throws VarSymboliqueException {
         double a = this.eaLeft.calculer();
         double b= this.eaRight.calculer();
         return Math.pow(a, b);
