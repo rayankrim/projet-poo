@@ -10,17 +10,11 @@ public class Polynome implements ExpressionArithmetique {
 	private int[] fonctionDerivee = new int[10];
 	private int[] puissanceDerivee = new int[10];
 
+	// contruscteur vide pr kinani
 
-	
-	//contruscteur vide pr kinani 
-	
 	public Polynome() {
-		
-		
-		
+
 	}
-	
-	
 
 	// Constructeur de la classe Polynome
 
@@ -36,9 +30,7 @@ public class Polynome implements ExpressionArithmetique {
 		}
 
 	}
-	
-	
-	
+
 	public void derive() {
 
 		for (int i = 0; i < nbMembre; i++) {
@@ -71,10 +63,9 @@ public class Polynome implements ExpressionArithmetique {
 			}
 
 		}
-		
-		
+
 	}
-	
+
 	public void afficher() {
 
 		System.out.println("");
@@ -109,32 +100,25 @@ public class Polynome implements ExpressionArithmetique {
 
 		}
 
-		
+	}
+
+	public Polynome getFonctionDerivee() {
+
+		Polynome poly = new Polynome(this.nbMembre, this.fonctionDerivee, this.puissanceDerivee);
+
+		return poly;
 
 	}
 
-	public Polynome getFonctionDerivee(){
-		
-	
-		Polynome poly = new Polynome(this.nbMembre,this.fonctionDerivee,this.puissanceDerivee);
-		
-		return poly; 
-		
-		
-		
-	}
-	
 	/*
-	public void auto() {
-		
-		System.out.println("tu veux deriver cb de fois? ");
-		
-		for()
-			.derive();
-		
-	}
-*/
-	
+	 * public void auto() {
+	 * 
+	 * System.out.println("tu veux deriver cb de fois? ");
+	 * 
+	 * for() .derive();
+	 * 
+	 * }
+	 */
 
 	@Override
 	public ExpressionArithmetique simplifier() {

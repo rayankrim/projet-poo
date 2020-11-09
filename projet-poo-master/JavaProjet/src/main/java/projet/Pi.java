@@ -1,32 +1,24 @@
 package projet;
 
-
 import java.util.Map;
 import java.util.TreeMap;
 
+public final class Pi implements ExpressionArithmetique {
 
-public final class  Pi implements ExpressionArithmetique {
-	
-	
 	private final Double pi;
-	
-	
+
 	public Pi(String pi) {
-		
-		
+
 		Map<String, Double> tableauAssociatif = new TreeMap<>();
-		tableauAssociatif.put("pi",3.141592654);
-		
-		
+		tableauAssociatif.put("pi", 3.141592654);
+
 		this.pi = tableauAssociatif.get(pi);
-		
-		
+
 	}
 
 	public double getPi() {
 		return this.pi;
 	}
-
 
 	@Override
 	public String toString() {
@@ -50,6 +42,5 @@ public final class  Pi implements ExpressionArithmetique {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 
 }

@@ -7,10 +7,9 @@ public class Exponentielle extends OperationUnaire {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	@Override
 	public double calculer() throws VarSymboliqueException {
-		
+
 		return Math.exp(this.ea.calculer());
 	}
 
@@ -19,7 +18,5 @@ public class Exponentielle extends OperationUnaire {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
 
 }

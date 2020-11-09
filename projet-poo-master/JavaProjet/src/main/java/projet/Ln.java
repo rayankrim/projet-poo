@@ -5,10 +5,10 @@ public class Ln extends OperationUnaire {
 	public Ln(ExpressionArithmetique ea) {
 		super(ea);
 	}
-	
+
 	@Override
 	public double calculer() throws VarSymboliqueException {
-		
+
 		return Math.log(this.ea.calculer());
 	}
 
@@ -17,7 +17,5 @@ public class Ln extends OperationUnaire {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
 
 }

@@ -25,13 +25,12 @@ public class Multiplication extends OperationBinaire {
 
 	@Override
 	public double calculer() throws VarSymboliqueException {
-double approximation = this.eaLeft.calculer() * this.eaRight.calculer() ; 
-		
-		approximation = Math.round(approximation* 10000 );
-		
-		
-		return approximation/10000;
-		
+		double approximation = this.eaLeft.calculer() * this.eaRight.calculer();
+
+		approximation = Math.round(approximation * 10000);
+
+		return approximation / 10000;
+
 	}
 
 	@Override
@@ -39,5 +38,4 @@ double approximation = this.eaLeft.calculer() * this.eaRight.calculer() ;
 		return this.simplifie(droite, gauche).simplifier();
 	}
 
-	
 }

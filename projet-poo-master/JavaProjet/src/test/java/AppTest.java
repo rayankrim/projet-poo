@@ -1,5 +1,6 @@
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.text.DecimalFormat;
 
@@ -18,8 +19,10 @@ import projet.Ln;
 import projet.Multiplication;
 import projet.Puissance;
 import projet.Sin;
+import projet.ConstanteSymbolique;
 import projet.Soustraction;
 import projet.VarSymbolique;
+import projet.VarSymboliqueException;
 
 /**
  * Unit test for simple App.
@@ -38,7 +41,7 @@ public class AppTest {
 	}
 
 	@Test
-	public void classExample() {
+	public void classExample() throws VarSymboliqueException {
 
 		// Réels
 		ExpressionArithmetique zero = new ConstEntiere(0);
@@ -50,8 +53,22 @@ public class AppTest {
 		ExpressionArithmetique cr = new ConstRationnelle(1, 17);
 
 		// Variable Symbolique
-		ExpressionArithmetique vs = new VarSymbolique('x');
-		
+		ExpressionArithmetique vs = new VarSymbolique("x");
+		ExpressionArithmetique cosVs = new Cos(vs);
+		ExpressionArithmetique sinVs = new Sin(vs);
+
+		try {
+			sinVs.calculer();
+			// problème
+			fail("cette ligne ne devrait pas être exécutée");
+		} catch (VarSymboliqueException e) {
+			// pas problème
+			// une erreur a bien été envoyée
+			System.out.println("L'Exception a bien été effectué ");
+		}
+
+		// assertEquals("x", ((VarSymbolique) vs.simplifier()).getVariable());
+
 		assertEquals('x', ((VarSymbolique) vs.simplifier()).getVariable());
 
 		// Opération de base
@@ -59,6 +76,10 @@ public class AppTest {
 		ExpressionArithmetique minus = new Soustraction(trois, cr);
 		ExpressionArithmetique times = new Multiplication(plus, minus);
 		// assertEquals(550 / 17.0, times.calculer(), 0.00001);
+		assertEquals(550 / 17.0, times.calculer(), 0.00001);
+
+		assertEquals(550, ((ConstRationnelle) times.simplifier()).getNumerateur());
+		assertEquals(17, ((ConstRationnelle) times.simplifier()).getDenominateur());
 
 		// Racine carré
 
@@ -67,8 +88,8 @@ public class AppTest {
 		ExpressionArithmetique sinus = new Sin(deux);
 		// assertEquals(-0.9899924966004454, cosinus.calculer(), 0.0001);
 		assertEquals(0.9092974268256817, sinus.calculer(), 0.0001);
-		System.out.println(cr.calculer());
-		System.out.println(cosinus.calculer());
+		// System.out.println(cr.calculer());
+		// System.out.println(cosinus.calculer());
 
 		// ln
 		ExpressionArithmetique ln2 = new Ln(deux);
@@ -86,6 +107,15 @@ public class AppTest {
 
 		assertEquals(550, ((ConstRationnelle) times.simplifier()).getNumerateur());
 		assertEquals(17, ((ConstRationnelle) times.simplifier()).getDenominateur());
+
+		// Constante Symbolique
+
+		ExpressionArithmetique e = new ConstanteSymbolique("e");
+
+		ExpressionArithmetique cosinusExpo = new Cos(e);
+		ExpressionArithmetique cosinusPi = new Cos(pi);
+
+		assertEquals(3.14, pi.calculer(), 0.01);
 
 		// test 1 + pi
 
@@ -137,33 +167,26 @@ public class AppTest {
 		System.out.println("test : Sin(pi/2)  " + SinOfPiParDeux.calculer());
 		ExpressionArithmetique UnPlusSinOfPiParDeux = new Addition(un, SinOfPiParDeux);
 		System.out.println("test : 1 + Sin(pi/2)  " + UnPlusSinOfPiParDeux.calculer());
-		
-		
-		
-		// test Polynome 
-		int[] tab = {3,5,10};
-		int[] tab2 = {2,1,0};
-		
-		
-		Polynome poly = new Polynome(3,tab, tab2);
+
+		// test Polynome
+		int[] tab = { 3, 5, 10 };
+		int[] tab2 = { 2, 1, 0 };
+
+		Polynome poly = new Polynome(3, tab, tab2);
 		poly.derive();
-		
-		Polynome poly2 = new Polynome(); 
-		poly2=poly.getFonctionDerivee();
-		
+
+		Polynome poly2 = new Polynome();
+		poly2 = poly.getFonctionDerivee();
+
 		poly2.derive();
-		
-		Polynome poly3 = new Polynome(); 
-		poly3=poly2.getFonctionDerivee();
-		
-		
-		
+
+		Polynome poly3 = new Polynome();
+		poly3 = poly2.getFonctionDerivee();
+
 		poly.afficher();
 		poly2.afficher();
 		poly3.afficher();
-		
-		
-		
+
 	}
 
 	@Test

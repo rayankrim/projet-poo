@@ -3,12 +3,12 @@ package projet;
 public class Sin extends OperationUnaire {
 
 	public Sin(ExpressionArithmetique ea) {
-	super(ea);
+		super(ea);
 	}
-	
+
 	@Override
 	public double calculer() throws VarSymboliqueException {
-	
+
 		return Math.sin(this.ea.calculer());
 	}
 
@@ -17,7 +17,5 @@ public class Sin extends OperationUnaire {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-
 
 }
