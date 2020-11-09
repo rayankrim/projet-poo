@@ -8,7 +8,7 @@ public class Soustraction extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer() {
+	public double calculer() throws VarSymboliqueException {
 		
 		
 		return this.eaLeft.calculer() - this.eaRight.calculer();

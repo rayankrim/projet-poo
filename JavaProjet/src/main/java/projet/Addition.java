@@ -9,7 +9,7 @@ public class Addition extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer() {
+	public double calculer() throws VarSymboliqueException {
 		return this.eaLeft.calculer() + this.eaRight.calculer();
 	}
 

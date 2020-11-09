@@ -17,7 +17,13 @@ public abstract class OperationUnaire implements ExpressionArithmetique{
 	protected ExpressionArithmetique simplifie(ConstRationnelle nb) {
 		return this;
 	}
+	
+	protected ExpressionArithmetique simplifie(ConstanteSymbolique var) {
+		return this;
+	}
 
+	
+	
 	public ExpressionArithmetique simplifier() {
 		this.ea= this.ea.simplifier();
 		
@@ -31,4 +37,8 @@ public abstract class OperationUnaire implements ExpressionArithmetique{
 			return this;
 		}
 	}
-}
+
+	
+	}
+
+	
