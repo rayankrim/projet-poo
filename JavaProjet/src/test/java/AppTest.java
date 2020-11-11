@@ -42,7 +42,7 @@ public class AppTest {
 		
 		assertEquals(3,((ConstRationnelle) noeud3.simplifier()).getNumerateur());
 		assertEquals(2,((ConstRationnelle) noeud3.simplifier()).getDenominateur());
-	}
+	} 
 /*	
 @Test
 	public void simpleSum() {
