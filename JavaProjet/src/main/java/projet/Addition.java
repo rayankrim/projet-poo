@@ -35,5 +35,10 @@ public class Addition extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
 		return simplifie(droite, gauche).simplifier();
 	}
+	
+	@Override
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
+		return new ConstEntiere(gauche.getValue() + droite.getEntier()).simplifier();
+	}
 
 }

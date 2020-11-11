@@ -4,7 +4,6 @@ public class Division extends OperationBinaire {
 
 	public Division(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
 		super(eaLeft, eaRight);
-
 	}
 
 	@Override
@@ -34,8 +33,8 @@ public class Division extends OperationBinaire {
 	}
 
 	@Override
-	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ExpressionArithmetique droite) {
-		return this;
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
+		return new ConstRationnelle(gauche.getValue(), droite.getEntier()).simplifier();
 	}
 
 }

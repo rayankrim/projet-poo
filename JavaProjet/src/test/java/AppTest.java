@@ -22,6 +22,35 @@ import projet.VarSymbolique;
  */
 public class AppTest {
 
+	// pour la question 9: bien ? mauvais ?
+	/*	@Test
+		public void afficherEa() {
+			ExpressionArithmetique ea= new VarSymbolique('z');
+			System.out.println(ea);
+		}
+		*/
+		// question 8: calcul d'une EA avec des Varsymbolique dont on connait la valeur.
+		@Test
+		public void question_7() {
+			
+			ExpressionArithmetique un = new ConstEntiere(1);
+			ExpressionArithmetique deux = new ConstEntiere(2);
+			ExpressionArithmetique x = new VarSymbolique('x');
+			ExpressionArithmetique y = new VarSymbolique('y');
+			ConstEntiere Un= (ConstEntiere) un;
+			VarSymbolique X = (VarSymbolique) x;
+			X.modifierVariable(Un.getEntier());
+			VarSymbolique Y = (VarSymbolique) y;
+			Y.modifierVariable(Un.getEntier());
+			
+			ExpressionArithmetique noeud1 = new Addition(Y,un);
+			ExpressionArithmetique noeud2 = new Division(X,noeud1);
+			ExpressionArithmetique noeud3 = new Addition(un,noeud2);
+			
+			assertEquals(3,((ConstRationnelle) noeud3.simplifier()).getNumerateur());
+			assertEquals(2,((ConstRationnelle) noeud3.simplifier()).getDenominateur());
+		}
+/*	
 	@Test
 	public void simpleSum() {
 
@@ -119,5 +148,5 @@ public class AppTest {
 		// System.out.println(divide.calculer());
 
 		
-	}
+	}*/
 }

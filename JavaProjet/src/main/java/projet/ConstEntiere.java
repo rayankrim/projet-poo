@@ -2,6 +2,7 @@ package projet;
 
 public final class ConstEntiere implements ExpressionArithmetique {
 
+	private final int entier;
 	public ConstEntiere(int value) {
 		this.entier = value;
 	}
@@ -9,8 +10,6 @@ public final class ConstEntiere implements ExpressionArithmetique {
 	public int getEntier() {
 		return entier;
 	}
-
-	private final int entier;
 
 	@Override
 	public ExpressionArithmetique simplifier() {

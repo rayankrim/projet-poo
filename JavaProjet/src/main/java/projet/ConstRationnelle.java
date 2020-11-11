@@ -40,8 +40,6 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 	public double calculer() {
 		int a=  getNumerateur();
 		int b = getDenominateur();
-		
-		
 		return (double) a /b ;
 	}
 
