@@ -41,4 +41,10 @@ public class Addition extends OperationBinaire {
 		return new ConstEntiere(gauche.getValue() + droite.getEntier()).simplifier();
 	}
 
+	@Override
+	public String afficher() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

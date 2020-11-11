@@ -53,5 +53,10 @@ public class Puissance extends OperationBinaire {
 		return false;
 	}
 
+	@Override
+	public String afficher() {
+		return eaLeft.afficher() + "^" + eaRight.afficher();
+	}
+
 
 }

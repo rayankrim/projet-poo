@@ -37,4 +37,8 @@ public class Division extends OperationBinaire {
 		return new ConstRationnelle(gauche.getValue(), droite.getEntier()).simplifier();
 	}
 
+	@Override
+	public String afficher() {
+		return eaLeft.afficher() + "/" + eaRight.afficher();
+	}
 }

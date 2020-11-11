@@ -26,4 +26,9 @@ public final class ConstEntiere implements ExpressionArithmetique {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String afficher() {
+		return this.getEntier() + "";
+	}
 }

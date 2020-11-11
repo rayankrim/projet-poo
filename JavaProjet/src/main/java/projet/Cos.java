@@ -20,6 +20,11 @@ public class Cos extends OperationUnaire {
 		return false;
 	}
 
+	@Override
+	public String afficher() {
+		return "cos(" + ea.afficher() + ")";
+	}
+
 
 
 }

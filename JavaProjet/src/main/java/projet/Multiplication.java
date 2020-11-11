@@ -33,5 +33,10 @@ public class Multiplication extends OperationBinaire {
 		return this.simplifie(droite, gauche).simplifier();
 	}
 
+	@Override
+	public String afficher() {
+		return eaLeft.afficher() + "*" + eaRight.afficher();
+	}
+
 	
 }

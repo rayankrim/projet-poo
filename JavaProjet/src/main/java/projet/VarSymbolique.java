@@ -5,19 +5,19 @@ import java.util.TreeMap;
 
 public final class VarSymbolique implements ExpressionArithmetique {
 
-    private final char variable;
+    private final String variable;
     private ExpressionArithmetique value;
 
 
-    public VarSymbolique(char variable) {
-        Map<Character,Character> tableauAssociatifVarS = new TreeMap<Character,Character>();
-        tableauAssociatifVarS.put('x','x');
-        tableauAssociatifVarS.put('y','y');
-        tableauAssociatifVarS.put('z','z');
+    public VarSymbolique(String variable) {
+        Map<String,String> tableauAssociatifVarS = new TreeMap<String,String>();
+        tableauAssociatifVarS.put("x","x");
+        tableauAssociatifVarS.put("y","y");
+        tableauAssociatifVarS.put("z","z");
         this.variable = tableauAssociatifVarS.get(variable);
     }
     
-    public char getVariable() {
+    public String getVariable() {
         return this.variable;
     }
     public int getValue() {
@@ -66,4 +66,9 @@ public final class VarSymbolique implements ExpressionArithmetique {
     	System.out.println(Vs.calculer());
     }
     */
+
+	@Override
+	public String afficher() {
+		return this.getVariable();
+	}
 }

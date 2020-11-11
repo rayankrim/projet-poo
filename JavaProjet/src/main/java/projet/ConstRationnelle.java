@@ -49,4 +49,10 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 		return false;
 	}
 
+	@Override
+	public String afficher() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

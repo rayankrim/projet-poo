@@ -1,37 +1,29 @@
 package projet;
 
-
 import java.util.Map;
 import java.util.TreeMap;
 
+public final class Pi implements ExpressionArithmetique {
 
-public final class  ConstanteSymbolique implements ExpressionArithmetique {
-	
-	
-	private final Double exponentielleOrPi;
-	
-	
-	public ConstanteSymbolique(String exponentielleOrPi) {
-		
-		
+	private final Double pi;
+
+	public Pi(String pi) {
+
 		Map<String, Double> tableauAssociatif = new TreeMap<>();
-		tableauAssociatif.put("pi",3.141592653);
-		tableauAssociatif.put("e", 2.71828182846);
-		
-		this.exponentielleOrPi = tableauAssociatif.get(exponentielleOrPi);
-		
-		
+		tableauAssociatif.put("pi", 3.141592654);
+
+		this.pi = tableauAssociatif.get(pi);
+
 	}
 
-	public double getvalueExpoOrPi() {
-		return this.exponentielleOrPi;
+	public double getPi() {
+		return this.pi;
 	}
-
 
 	@Override
 	public String toString() {
 
-		return " " + exponentielleOrPi;
+		return " " + pi;
 
 	}
 
@@ -42,7 +34,7 @@ public final class  ConstanteSymbolique implements ExpressionArithmetique {
 
 	@Override
 	public double calculer() {
-		return getvalueExpoOrPi();
+		return getPi();
 	}
 
 	@Override
@@ -56,6 +48,5 @@ public final class  ConstanteSymbolique implements ExpressionArithmetique {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }
