@@ -33,6 +33,10 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 		return this;
 	}
 	
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, VarSymbolique droite) {
+		return this;
+	}
+	
 	@Override
 	public ExpressionArithmetique simplifier() {
 
@@ -68,6 +72,10 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 			VarSymbolique gauche= (VarSymbolique) this.eaLeft;
 			ConstEntiere droite= (ConstEntiere) this.eaRight;
 			res=simplifie(gauche, droite);
+		}else if(this.eaLeft instanceof VarSymbolique && this.eaRight instanceof VarSymbolique) {
+			VarSymbolique gauche=(VarSymbolique) this.eaLeft;
+			VarSymbolique droite=(VarSymbolique) this.eaRight;
+			res=simplifie(gauche,droite);
 		}
 
 		else {

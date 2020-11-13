@@ -14,6 +14,7 @@ public final class VarSymbolique implements ExpressionArithmetique {
         tableauAssociatifVarS.put("x","x");
         tableauAssociatifVarS.put("y","y");
         tableauAssociatifVarS.put("z","z");
+        tableauAssociatifVarS.put("a","a");
         this.variable = tableauAssociatifVarS.get(variable);
     }
     
@@ -21,13 +22,13 @@ public final class VarSymbolique implements ExpressionArithmetique {
         return this.variable;
     }
     public int getValue() {
-    	if(this.value==null)
+    	if(isValueNull())
     		throw new RuntimeException("Impossible de donner la valeur d'un x qui n'a pas de valeur.");
     	else
     		return (int) this.value.calculer();
     }
-    
-    public void modifierVariable(int nb) {
+   
+    public void setValue(int nb) {
     	this.value= new ConstEntiere(nb);
     }
     
@@ -36,12 +37,13 @@ public final class VarSymbolique implements ExpressionArithmetique {
         return this;
     }
 
-    public boolean isNull(ExpressionArithmetique v) {
-    	return v==null;
+    public boolean isValueNull() {
+    	return this.value==null ? true:false;
     }
+      
     @Override
     public double calculer() {
-    	if(this.value==null)
+    	if(isValueNull())
     		throw new RuntimeException("Impossible de calculer un x qui n'a pas de valeur.");
     	else
     		return this.value.calculer();
@@ -54,6 +56,12 @@ public final class VarSymbolique implements ExpressionArithmetique {
 		// TODO Auto-generated method stub
 		return false;
 	}
+    
+	@Override
+	public String afficher() {
+		return this.getVariable();
+	}
+
 /*
     public static void main (String [] args) throws RuntimeException{
     	ExpressionArithmetique vs=new VarSymbolique('x');
@@ -67,8 +75,4 @@ public final class VarSymbolique implements ExpressionArithmetique {
     }
     */
 
-	@Override
-	public String afficher() {
-		return this.getVariable();
-	}
 }

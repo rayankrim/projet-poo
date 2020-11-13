@@ -1,5 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import projet.Addition;
@@ -9,8 +11,10 @@ import projet.ConstanteSymbolique;
 import projet.Cos;
 import projet.Division;
 import projet.ExpressionArithmetique;
+import projet.Indice;
 import projet.Ln;
 import projet.Multiplication;
+import projet.OperationBinaire;
 import projet.Puissance;
 import projet.Sin;
 import projet.Soustraction;
@@ -21,10 +25,36 @@ import projet.VarSymbolique;
  */
 public class AppTest {
 
-	
+	@Test
+	public void question_11() {
+		ExpressionArithmetique a = new VarSymbolique("a");
+		ExpressionArithmetique x= new VarSymbolique("x");
+		ExpressionArithmetique deb= new ConstEntiere(0);
+		ExpressionArithmetique fin= new ConstEntiere(4);
+		ConstEntiere d=(ConstEntiere) deb;
+		ConstEntiere f=(ConstEntiere) fin;
+		String Somme=new String();
+		for(int i=d.getEntier();i<=f.getEntier();i++) {
+			ExpressionArithmetique compteur=new ConstEntiere(i);
+			ConstEntiere c=(ConstEntiere) compteur;
+			ExpressionArithmetique puissance= new Puissance(x,c);
+			ExpressionArithmetique indice= new Indice(a,c);
+			ExpressionArithmetique produit=new Multiplication(indice,puissance);
+			
+			if(i!=f.getEntier()) {
+				Somme+=produit.afficher()+"+";
+			}else {
+				Somme+=produit.afficher();
+			}
+		}
+		
+		System.out.println(Somme);
+		assertEquals("a(0)*x^0+a(1)*x^1+a(2)*x^2+a(3)*x^3+a(4)*x^4",Somme);
+		
+	}
 	
 	// question 8: calcul d'une EA avec des Varsymbolique dont on connait la valeur.
-	@Test
+/*	@Test
 	public void question_7() {
 		
 		ExpressionArithmetique un = new ConstEntiere(1);
@@ -32,19 +62,20 @@ public class AppTest {
 		ExpressionArithmetique y = new VarSymbolique("y");
 		ConstEntiere Un= (ConstEntiere) un;
 		VarSymbolique X = (VarSymbolique) x;
-		X.modifierVariable(Un.getEntier());
+		X.setValue(Un.getEntier());
 		VarSymbolique Y = (VarSymbolique) y;
-		Y.modifierVariable(Un.getEntier());
+		Y.setValue(Un.getEntier());
 		
-		ExpressionArithmetique noeud1 = new Addition(Y,un);
-		ExpressionArithmetique noeud2 = new Division(X,noeud1);
-		ExpressionArithmetique noeud3 = new Addition(un,noeud2);
-		
+		OperationBinaire noeud1 = new Addition(Y,un);
+		OperationBinaire noeud2 = new Division(X,noeud1);
+		OperationBinaire noeud3 = new Addition(un,noeud2);
+	
 		assertEquals(3,((ConstRationnelle) noeud3.simplifier()).getNumerateur());
 		assertEquals(2,((ConstRationnelle) noeud3.simplifier()).getDenominateur());
-	} 
-/*	
-@Test
+	}*/ 
+	
+
+/*	@Test
 	public void simpleSum() {
 
 		ConstEntiere neuf = new ConstEntiere(9);
