@@ -26,6 +26,46 @@ import projet.VarSymbolique;
 public class AppTest {
 
 	@Test
+	public void question_12() {
+		ExpressionArithmetique a = new VarSymbolique("a");
+		ExpressionArithmetique x= new VarSymbolique("x");
+		ExpressionArithmetique deb= new ConstEntiere(0);
+		ExpressionArithmetique fin= new ConstEntiere(4);
+		ConstEntiere d=(ConstEntiere) deb;
+		ConstEntiere f=(ConstEntiere) fin;
+		String Somme=new String();
+		
+		for(int i=d.getEntier();i<=f.getEntier();i=i+2) {
+			ExpressionArithmetique compteur=new ConstEntiere(i);
+			ConstEntiere c=(ConstEntiere) compteur;
+			ExpressionArithmetique indice= new Indice(a,c);
+			
+			if(i!=f.getEntier()) {
+				ExpressionArithmetique compteurSuivant=new ConstEntiere(i+1);
+				ConstEntiere cSuivant=(ConstEntiere) compteurSuivant;
+				ExpressionArithmetique indiceSuivant= new Indice(a,cSuivant);
+
+				ExpressionArithmetique produit=new Multiplication(indice,indiceSuivant);
+				Somme+=produit.afficher()+"*";
+			}else {
+				Somme+=indice.afficher()+"*";
+			}
+		}
+		int I=0;
+		for(int i=d.getEntier();i<=f.getEntier();i++) {
+			I+=i;
+		}
+		ExpressionArithmetique compteur=new ConstEntiere(I);
+		ConstEntiere c=(ConstEntiere) compteur;
+		ExpressionArithmetique puissance= new Puissance(x,c);
+		Somme+=puissance.afficher();
+		
+	//	System.out.println(Somme);
+	//	assertEquals("a(0)*x^0+a(1)*x^1+a(2)*x^2+a(3)*x^3+a(4)*x^4",Somme);
+		assertEquals("a(0)*a(1)*a(2)*a(3)*a(4)*x^10",Somme);
+	}
+	
+	/*	@Test
 	public void question_11() {
 		ExpressionArithmetique a = new VarSymbolique("a");
 		ExpressionArithmetique x= new VarSymbolique("x");
@@ -51,7 +91,7 @@ public class AppTest {
 		System.out.println(Somme);
 		assertEquals("a(0)*x^0+a(1)*x^1+a(2)*x^2+a(3)*x^3+a(4)*x^4",Somme);
 		
-	}
+	}*/
 	
 	// question 8: calcul d'une EA avec des Varsymbolique dont on connait la valeur.
 /*	@Test
