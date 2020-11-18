@@ -39,12 +39,27 @@ public final class ConstanteSymbolique implements ExpressionArithmetique {
 	}
 
 	@Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
+	public boolean equals(Object expr2) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	@Override
 	public String afficher() {
-		return this.getvalueExpoOrPi() + "";
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public void derive() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ExpressionArithmetique getFonctionDerivee() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

@@ -3,8 +3,14 @@ package projet;
 public interface ExpressionArithmetique {
 	public ExpressionArithmetique simplifier();
 
-	public double calculer() throws VarSymboliqueException;
+	public double calculer();
 
-	boolean egaliteAr(ExpressionArithmetique expr2);
 	public String afficher();
+
+	public void derive();
+
+	public ExpressionArithmetique getFonctionDerivee();
+	
+	public boolean equals(Object expr2) ;
+
 }

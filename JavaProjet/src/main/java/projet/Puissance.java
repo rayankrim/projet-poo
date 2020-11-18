@@ -6,7 +6,7 @@ public class Puissance extends OperationBinaire {
 		super(x, n);
 	}
 
-	public double calculer() throws VarSymboliqueException {
+	public double calculer()  {
 		double a = this.eaLeft.calculer();
 		double b = this.eaRight.calculer();
 		return Math.pow(a, b);
@@ -48,12 +48,25 @@ public class Puissance extends OperationBinaire {
 	}
 
 	@Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
+	public boolean equals(Object expr2) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 	@Override
 	public String afficher() {
 		return eaLeft.afficher() + "^" + eaRight.afficher();
+	}
+
+	
+	@Override
+	public ExpressionArithmetique getFonctionDerivee() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void derive() {
+		// TODO Auto-generated method stub
+		
 	}
 }

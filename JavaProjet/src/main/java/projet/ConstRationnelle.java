@@ -40,17 +40,32 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 	public double calculer() {
 		int a = getNumerateur();
 		int b = getDenominateur();
-		
-		return (double) a/b ;
+
+		return (double) a / b;
 	}
 
 	@Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
+	public boolean equals(Object expr2) {
+		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	@Override
 	public String afficher() {
-		return this.getNumerateur() + "/" + this.getDenominateur();
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public void derive() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ExpressionArithmetique getFonctionDerivee() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

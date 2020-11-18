@@ -9,7 +9,7 @@ public class Addition extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer() throws VarSymboliqueException {
+	public double calculer()  {
 
 		double approximation = this.eaLeft.calculer() + this.eaRight.calculer();
 
@@ -37,11 +37,11 @@ public class Addition extends OperationBinaire {
 		return new ConstEntiere(gauche.getEntier() + droite.getEntier()).simplifier();
 	}
 
-	// @Override
-	// protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere
-	// droite) {
-	// return new (this.gauche.getVariable() + this.droite.getEntier()) ;
-	// }
+	//@Override
+	//protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere
+	//droite) {
+	//return new (this.gauche.getVariable() + this.droite.getEntier()) ;
+	//}
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
@@ -55,4 +55,30 @@ public class Addition extends OperationBinaire {
 		return super.simplifie(gauche, droite);
 	}
 
+	@Override
+	public String afficher() {
+		// TODO Auto-generated method stub
+		return "("+eaLeft.afficher()+"+"+eaRight.afficher()+")";
+		
+	}
+
+	@Override
+	public boolean equals(Object expr2) {
+		
+		return false;
+	}
+
+	@Override
+	public void derive() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ExpressionArithmetique getFonctionDerivee() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }
