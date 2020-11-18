@@ -7,7 +7,7 @@ public class RacineCarre extends OperationUnaire {
 		super(ea);
 	}
 
-	public double calculer() throws VarSymboliqueException {// faire l'exception pour les nb <1.
+	public double calculer()  {// faire l'exception pour les nb <1.
 		double calcul = Math.sqrt(this.ea.calculer());
 		int c = (int) calcul;
 		if (c * c != this.ea.calculer()) {
@@ -45,11 +45,23 @@ public class RacineCarre extends OperationUnaire {
 	}
 
 	@Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
+	public boolean equals(Object expr2) {
 		return false;
 	}
 	@Override
 	public String afficher() {
 		return "√" + ea.afficher();
+	}
+
+	@Override
+	public void derive() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ExpressionArithmetique getFonctionDerivee() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

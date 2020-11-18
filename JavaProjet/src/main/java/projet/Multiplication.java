@@ -22,9 +22,14 @@ public class Multiplication extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstEntiere droite) {
 		return new ConstEntiere(gauche.getEntier() * droite.getEntier()).simplifier();
 	}
+	
+	@Override
+	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ExpressionArithmetique droite) {
+		return new Multiplication(gauche,droite) ;
+	}
 
 	@Override
-	public double calculer() throws VarSymboliqueException {
+	public double calculer()  {
 		double approximation = this.eaLeft.calculer() * this.eaRight.calculer();
 
 		approximation = Math.round(approximation * 10000);
@@ -39,6 +44,21 @@ public class Multiplication extends OperationBinaire {
 	}
 	@Override
 	public String afficher() {
-		return eaLeft.afficher() + "*" + eaRight.afficher();
+		return "("+ eaLeft.afficher() + "*" + eaRight.afficher()+ ")";
+	}
+//
+	
+	@Override
+	public void derive() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	//X * 0 = 0 + PUISSANCE 0 
+
+	@Override
+	public ExpressionArithmetique getFonctionDerivee() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

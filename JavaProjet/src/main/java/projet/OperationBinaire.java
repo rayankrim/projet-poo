@@ -77,9 +77,10 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 		return res;
 
 	}
+	
 
 	@Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
+	public boolean equals(Object expr2) {
 		return this == expr2;
 
 	}
