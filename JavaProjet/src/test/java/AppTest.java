@@ -2,27 +2,22 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-<<<<<<< HEAD
-=======
+
 import java.text.DecimalFormat;
 
->>>>>>> origin/rayan
+
 import org.junit.Test;
 
 import projet.Addition;
 import projet.ConstEntiere;
 import projet.ConstRationnelle;
-<<<<<<< HEAD
-import projet.ConstanteSymbolique;
-import projet.Cos;
-import projet.Division;
-=======
+
 import projet.Pi;
 import projet.Polynome;
 import projet.Cos;
 import projet.Division;
 import projet.Exponentielle;
->>>>>>> origin/rayan
+
 import projet.ExpressionArithmetique;
 import projet.Ln;
 import projet.Multiplication;
@@ -30,9 +25,7 @@ import projet.Puissance;
 import projet.Sin;
 import projet.Soustraction;
 import projet.VarSymbolique;
-<<<<<<< HEAD
-import projet.VarSymboliqueException;
-=======
+
 import projet.RacineCarre;
 
 

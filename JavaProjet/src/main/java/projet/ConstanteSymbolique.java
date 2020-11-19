@@ -45,10 +45,21 @@ public final class  ConstanteSymbolique implements ExpressionArithmetique {
 		return getvalueExpoOrPi();
 	}
 
-	@Override
 	public boolean egaliteAr(ExpressionArithmetique expr2) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String afficher() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void derive() {
+		// TODO Auto-generated method stub
+		
 	}
 
 
