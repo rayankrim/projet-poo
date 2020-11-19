@@ -8,10 +8,14 @@ public class Soustraction extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer() throws VarSymboliqueException {
-		
-		
-		return this.eaLeft.calculer() - this.eaRight.calculer();
+	public double calculer() {
+
+		double approximation = this.eaLeft.calculer() - this.eaRight.calculer();
+
+		approximation = Math.round(approximation * 10000);
+
+		return approximation / 10000;
+
 	}
 
 	@Override
@@ -37,11 +41,44 @@ public class Soustraction extends OperationBinaire {
 		return new ConstRationnelle(droite.getDenominateur() * gauche.getEntier() - droite.getNumerateur() * 1,
 				1 * droite.getDenominateur()).simplifier();
 	}
+
 	@Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
-		// TODO Auto-generated method stub
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
+		return isNeutre(gauche, droite);
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VarSymbolique droite) {
+		return isNeutre(gauche, droite);
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
+		if (droite.getEntier() == 0) {
+			return gauche;
+		}
+		return new ConstEntiere(gauche.getValue() - droite.getEntier()).simplifier();
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
+		return new ConstEntiere(gauche.getEntier() - droite.getValue()).simplifier();
+	}
+
+	@Override
+	public boolean equals(Object expr2) {
 		return false;
 	}
 
+	@Override
+	public String afficher() {
+		return "(" + eaLeft.afficher() + "-" + eaRight.afficher() + ")";
+	}
+
+	@Override
+	public void derive() {
+		// TODO Auto-generated method stub
+
+	}
 
 }

@@ -24,8 +24,79 @@ public class Multiplication extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer() throws VarSymboliqueException {
-		return this.eaLeft.calculer() * this.eaRight.calculer();
+	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ExpressionArithmetique droite) {
+		return new Multiplication(gauche, droite);
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
+		if (droite.getEntier() == 1) {
+			return new VarSymbolique(gauche.getVariable());
+		} else if (droite.getEntier() == 0) {
+			return new ConstEntiere(droite.getEntier());
+		}
+		return new ConstEntiere(gauche.getValue() * droite.getEntier()).simplifier();
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
+		if (gauche.getEntier() == 1) {
+			return new VarSymbolique(droite.getVariable());
+		} else if (gauche.getEntier() == 0) {
+			return new ConstEntiere(gauche.getEntier());
+		} else if (droite.isValueNull()) {
+
+			return this;
+		}
+		return new ConstEntiere(gauche.getEntier() * droite.getValue()).simplifier();
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
+		return isNeutre(gauche, droite);
+
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VarSymbolique droite) {
+		return isNeutre(gauche, droite);
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Addition droite) {
+		return new Addition(new Multiplication(gauche, droite.eaLeft),
+				new Multiplication(gauche, droite.eaRight).simplifier());
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Soustraction droite) {
+		return new Soustraction(new Multiplication(gauche, droite.eaLeft),
+				new Multiplication(gauche, droite.eaRight).simplifier());
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, VarSymbolique droite) {
+		return super.simplifie(gauche, droite);
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstRationnelle droite) {
+		return super.simplifie(gauche, droite);
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Multiplication droite) {
+		return new Multiplication(new Multiplication(gauche, droite.eaLeft), droite.eaRight).simplifier();
+	}
+
+	@Override
+	public double calculer() {
+		double approximation = this.eaLeft.calculer() * this.eaRight.calculer();
+
+		approximation = Math.round(approximation * 10000);
+
+		return approximation / 10000;
+
 	}
 
 	@Override
@@ -33,5 +104,22 @@ public class Multiplication extends OperationBinaire {
 		return this.simplifie(droite, gauche).simplifier();
 	}
 
-	
+	@Override
+	public String afficher() {
+		if (eaLeft instanceof VarSymbolique) {
+			return eaRight.afficher() + "" + eaLeft.afficher();
+		} else if (eaRight instanceof VarSymbolique) {
+			return eaLeft.afficher() + "" + eaRight.afficher();
+		} else if (eaLeft == new ConstEntiere(0)) {
+			return eaLeft.afficher();
+		}
+		return "(" + eaLeft.afficher() + "*" + eaRight.afficher() + ")";
+	}
+
+	@Override
+	public void derive() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

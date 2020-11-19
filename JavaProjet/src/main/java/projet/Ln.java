@@ -5,19 +5,29 @@ public class Ln extends OperationUnaire {
 	public Ln(ExpressionArithmetique ea) {
 		super(ea);
 	}
-	
+
+
 	@Override
-	public double calculer() throws VarSymboliqueException {
-		
+	public double calculer() {
+
 		return Math.log(this.ea.calculer());
+	}
+	// methode siplifier
+
+	@Override
+	public boolean equals(Object expr2) {
+		return false;
 	}
 
 	@Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
-		// TODO Auto-generated method stub
-		return false;
+	public String afficher() {
+		return "ln(" + ea.afficher() + ")";
 	}
-	
-	
+
+	@Override
+	public void derive() {
+		// TODO Auto-generated method stub
+
+	}
 
 }

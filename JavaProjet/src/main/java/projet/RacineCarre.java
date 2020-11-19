@@ -45,9 +45,20 @@ public class RacineCarre extends OperationUnaire {
 	}
 
 	@Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
-		// TODO Auto-generated method stub
+	public boolean equals(Object expr2) {
 		return false;
 	}
+
+	@Override
+	public String afficher() {
+		return "√" + ea.afficher();
+	}
+
+	@Override
+	public void derive() {
+		// TODO Auto-generated method stub
+
+	}
+
 
 }
