@@ -6,7 +6,7 @@ public class Puissance extends OperationBinaire {
 		super(x, n);
 	}
 
-	public double calculer()  {
+	public double calculer() {
 		double a = this.eaLeft.calculer();
 		double b = this.eaRight.calculer();
 		return Math.pow(a, b);
@@ -43,6 +43,34 @@ public class Puissance extends OperationBinaire {
 	}
 
 	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VarSymbolique droite) {
+		return isNeutre(gauche, droite);
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
+		return isNeutre(gauche, droite);
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
+		return this;
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
+		if (droite.getEntier() == 1 && gauche.isValueNull() == true) {
+			return new VarSymbolique(gauche.getVariable());
+		} else if (droite.getEntier() == 0 && gauche.isValueNull() == true) {
+			return new ConstEntiere(1);
+		} else if (gauche.isValueNull() == true) {
+			return this;
+		}
+		int simp = (int) Math.pow(gauche.getValue(), droite.getEntier());
+		return new ConstEntiere(simp).simplifier();
+	}
+
+	@Override
 	public ExpressionArithmetique simplifier() {
 		return super.simplifier();
 	}
@@ -52,21 +80,19 @@ public class Puissance extends OperationBinaire {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	@Override
 	public String afficher() {
-		return eaLeft.afficher() + "^" + eaRight.afficher();
-	}
-
-	
-	@Override
-	public ExpressionArithmetique getFonctionDerivee() {
-		// TODO Auto-generated method stub
-		return null;
+		if (eaRight == new ConstEntiere(1)) {
+			return eaLeft.afficher();
+		}
+		return this.eaLeft.afficher() + "^" + this.eaRight.afficher();
 	}
 
 	@Override
 	public void derive() {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 }

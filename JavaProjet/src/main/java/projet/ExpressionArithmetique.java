@@ -9,8 +9,6 @@ public interface ExpressionArithmetique {
 
 	public void derive();
 
-	public ExpressionArithmetique getFonctionDerivee();
-	
-	public boolean equals(Object expr2) ;
+	public boolean equals(Object expr2);
 
 }

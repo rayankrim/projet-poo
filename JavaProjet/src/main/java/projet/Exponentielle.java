@@ -8,12 +8,12 @@ public class Exponentielle extends OperationUnaire {
 	}
 
 	@Override
-	public double calculer()  {
+	public double calculer() {
 
 		return Math.exp(this.ea.calculer());
 	}
-	
-	//simplifier
+
+	// simplifier
 
 	@Override
 	public boolean equals(Object expr2) {
@@ -30,13 +30,7 @@ public class Exponentielle extends OperationUnaire {
 	@Override
 	public void derive() {
 		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public ExpressionArithmetique getFonctionDerivee() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

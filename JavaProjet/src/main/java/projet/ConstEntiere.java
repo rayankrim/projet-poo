@@ -30,13 +30,13 @@ public final class ConstEntiere implements ExpressionArithmetique {
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass()) {
-			
+
 			return false;
-		
+
 		}
-		System.out.println("v1= "+ this.getEntier());	
-		System.out.println("v2= " );	
-		System.out.println(((ConstEntiere) obj).getEntier() == this.getEntier());	
+		// System.out.println("v1= "+ this.getEntier());
+		// System.out.println("v2= " );
+		// System.out.println(((ConstEntiere) obj).getEntier() == this.getEntier());
 		return ((ConstEntiere) obj).getEntier() == this.getEntier();
 	}
 
@@ -49,12 +49,6 @@ public final class ConstEntiere implements ExpressionArithmetique {
 	public void derive() {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public ExpressionArithmetique getFonctionDerivee() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

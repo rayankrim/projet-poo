@@ -122,43 +122,11 @@ public class Polynome implements ExpressionArithmetique {
 
 	}
 
-	@Override
-	public ExpressionArithmetique getFonctionDerivee() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	public static void main(String[] args) {
 
-		ExpressionArithmetique deux = new ConstEntiere(2);
-		ExpressionArithmetique trois = new ConstEntiere(3);
-		ExpressionArithmetique cinq = new ConstEntiere(5);
-		ExpressionArithmetique dix = new ConstEntiere(10);
-		ExpressionArithmetique quatre = new ConstEntiere(4);
 
-		ExpressionArithmetique vs = new VarSymbolique("x");
 
-		ExpressionArithmetique puissance = new Puissance(vs, deux);
-		ExpressionArithmetique multiplication = new Multiplication(trois, puissance);
-
-		ExpressionArithmetique puissance3 = new Puissance(vs, trois);
-		ExpressionArithmetique puissance2 = new Puissance(vs, quatre);
-
-		ExpressionArithmetique cinqx = new Multiplication(cinq, vs);
-
-		Multiplication nombre1 = new Multiplication(cinq, puissance2);
-
-		Multiplication nombre2 = new Multiplication(quatre, puissance3);
-		Multiplication nombre3 = new Multiplication(trois, puissance);
-
-		// ExpressionArithmetique cinqxpuissance = new Puissance(cinq, deux);
-
-		Polynome poly1 = new Polynome(nombre1, nombre2, nombre3, cinqx, dix);
-
-		System.out.println(poly1.derivation(3).afficher());
-
-//puissance 0, q15 a finir 
-
-	}
+	
 
 }

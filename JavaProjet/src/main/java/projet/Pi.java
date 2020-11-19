@@ -52,13 +52,7 @@ public final class Pi implements ExpressionArithmetique {
 	@Override
 	public void derive() {
 		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public ExpressionArithmetique getFonctionDerivee() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

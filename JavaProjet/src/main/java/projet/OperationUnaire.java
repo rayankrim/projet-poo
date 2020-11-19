@@ -20,7 +20,7 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 		return this;
 	}
 
-	protected ExpressionArithmetique simplifie(ConstanteSymbolique var) {
+	protected ExpressionArithmetique simplifie(Pi pi) {
 		return this;
 	}
 
@@ -33,6 +33,10 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 		} else if (this.ea instanceof ConstRationnelle) {
 			ConstRationnelle nb = (ConstRationnelle) this.ea;
 			return simplifie(nb);
+		} else if (this.ea instanceof Pi) {
+			Pi pi = (Pi) this.ea;
+			return simplifie(pi);
+
 		} else {
 			return this;
 		}

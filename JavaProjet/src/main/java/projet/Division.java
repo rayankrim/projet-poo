@@ -8,7 +8,7 @@ public class Division extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer()  {
+	public double calculer() {
 		double approximation = this.eaLeft.calculer() / this.eaRight.calculer();
 
 		approximation = Math.round(approximation * 10000);
@@ -42,6 +42,31 @@ public class Division extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ExpressionArithmetique droite) {
 		return this;
 	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
+		return isNeutre(gauche, droite);
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VarSymbolique droite) {
+		return isNeutre(gauche, droite);
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
+		return this;
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
+		if (droite.getEntier() == 1) {
+			return gauche;
+		}
+		return new ConstRationnelle(gauche.getValue(), droite.getEntier()).simplifier();
+
+	}
+
 	@Override
 	public String afficher() {
 		return eaLeft.afficher() + "/" + eaRight.afficher();
@@ -50,14 +75,9 @@ public class Division extends OperationBinaire {
 	@Override
 	public void derive() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	@Override
-	public ExpressionArithmetique getFonctionDerivee() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	@Override
 	public boolean equals(Object expr2) {
 		// TODO Auto-generated method stub

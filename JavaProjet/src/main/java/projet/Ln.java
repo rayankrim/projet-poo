@@ -11,12 +11,13 @@ public class Ln extends OperationUnaire {
 
 		return Math.log(this.ea.calculer());
 	}
-	//methode siplifier 
-	
+	// methode siplifier
+
 	@Override
 	public boolean equals(Object expr2) {
 		return false;
 	}
+
 	@Override
 	public String afficher() {
 		return "ln(" + ea.afficher() + ")";
@@ -25,12 +26,7 @@ public class Ln extends OperationUnaire {
 	@Override
 	public void derive() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	@Override
-	public ExpressionArithmetique getFonctionDerivee() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

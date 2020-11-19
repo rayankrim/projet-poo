@@ -50,22 +50,20 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 		return false;
 	}
 
-	@Override
+	
+	
 	public String afficher() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        if (numerateur == denominateur) {
+        return ""+numerateur;
+    }
+        return "(" + numerateur + "/" + denominateur + ")";
+
+}
 
 	@Override
 	public void derive() {
 		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public ExpressionArithmetique getFonctionDerivee() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

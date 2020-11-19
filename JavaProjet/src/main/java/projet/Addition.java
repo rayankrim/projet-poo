@@ -9,7 +9,7 @@ public class Addition extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer()  {
+	public double calculer() {
 
 		double approximation = this.eaLeft.calculer() + this.eaRight.calculer();
 
@@ -37,12 +37,6 @@ public class Addition extends OperationBinaire {
 		return new ConstEntiere(gauche.getEntier() + droite.getEntier()).simplifier();
 	}
 
-	//@Override
-	//protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere
-	//droite) {
-	//return new (this.gauche.getVariable() + this.droite.getEntier()) ;
-	//}
-
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
 
@@ -50,35 +44,63 @@ public class Addition extends OperationBinaire {
 	}
 
 	@Override
-	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VarSymbolique droite) {
-		// TODO Auto-generated method stub
-		return super.simplifie(gauche, droite);
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Addition droite) {
+		return new Addition(new Addition(gauche, droite.eaLeft).simplifier(), droite.eaRight);
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(Addition gauche, ConstEntiere droite) {
+		return new Addition(gauche.eaRight, new Addition(gauche.eaLeft, droite).simplifier());
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Multiplication droite) {
+		return new Multiplication(gauche, new Multiplication(gauche, droite.eaRight).simplifier());
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
+		return isNeutre(gauche, droite);
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere eaLeft, VarSymbolique droite) {
+		return isNeutre(eaLeft, droite);
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
+		if (droite.getEntier() == 0) {
+			return gauche;
+		}
+		return new ConstEntiere(gauche.getValue() + droite.getEntier()).simplifier();
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
+		if (gauche.getEntier() == 0) {
+			return droite;
+		}
+		return new ConstEntiere(gauche.getEntier() + droite.getValue()).simplifier();
 	}
 
 	@Override
 	public String afficher() {
-		// TODO Auto-generated method stub
-		return "("+eaLeft.afficher()+"+"+eaRight.afficher()+")";
 		
+		return "(" + eaLeft.afficher() + "+" + eaRight.afficher() + ")";
+
 	}
 
 	@Override
 	public boolean equals(Object expr2) {
-		
+
 		return false;
 	}
 
 	@Override
 	public void derive() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	@Override
-	public ExpressionArithmetique getFonctionDerivee() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 }

@@ -19,12 +19,9 @@ import projet.Ln;
 import projet.Multiplication;
 import projet.Puissance;
 import projet.Sin;
-import projet.ConstanteSymbolique;
 import projet.Soustraction;
 import projet.VarSymbolique;
-import projet.VarSymboliqueException;
 import projet.RacineCarre;
-
 
 /**
  * Unit test for simple App.
@@ -43,7 +40,7 @@ public class AppTest {
 	}
 
 	@Test
-	public void classExample() throws VarSymboliqueException {
+	public void classExample() {
 
 		// Réels
 		ExpressionArithmetique zero = new ConstEntiere(0);
@@ -61,34 +58,22 @@ public class AppTest {
 		VarSymbolique vs = new VarSymbolique("x");
 		ExpressionArithmetique cosVs = new Cos(vs);
 		ExpressionArithmetique sinVs = new Sin(vs);
-/*
-		try {
-			sinVs.calculer();
-			// problème
-			fail("cette ligne ne devrait pas être exécutée");
-		} catch (VarSymboliqueException e) {	//renommer l'exception
-			// pas problème
-			// une erreur a bien été envoyée
-			System.out.println("L'Exception a bien été effectué ");
-		}
 		
-		*/
 		
 
 		// assertEquals("x", ((VarSymbolique) vs.simplifier()).getVariable());
 
-		//assertEquals('x', ((VarSymbolique) vs.simplifier()).getVariable());
+		// assertEquals('x', ((VarSymbolique) vs.simplifier()).getVariable());
 
 		// Opération de base
 		ExpressionArithmetique plus = new Addition(neuf, deux);
 		ExpressionArithmetique minus = new Soustraction(trois, cr);
 		ExpressionArithmetique times = new Multiplication(plus, minus);
 		// assertEquals(550 / 17.0, times.calculer(), 0.00001);
-		//assertEquals(550 / 17.0, times.calculer(), 0.00001);
+		// assertEquals(550 / 17.0, times.calculer(), 0.00001);
 
 		assertEquals(550, ((ConstRationnelle) times.simplifier()).getNumerateur());
 		assertEquals(17, ((ConstRationnelle) times.simplifier()).getDenominateur());
-
 
 		// Racine carré de 4
 		ExpressionArithmetique quatre = new ConstEntiere(4);
@@ -103,7 +88,7 @@ public class AppTest {
 		// assertEquals(-0.9899924966004454, cosinus.calculer(), 0.0001);
 		assertEquals(0.9092974268256817, sinus.calculer(), 0.0001);
 
-		//System.out.println("cos(1/17) = " + cosinus.calculer());
+		// System.out.println("cos(1/17) = " + cosinus.calculer());
 
 		// System.out.println(cr.calculer());
 		// System.out.println(cosinus.calculer());
@@ -125,19 +110,9 @@ public class AppTest {
 		assertEquals(550, ((ConstRationnelle) times.simplifier()).getNumerateur());
 		assertEquals(17, ((ConstRationnelle) times.simplifier()).getDenominateur());
 
-		// Constante Symbolique
-
-		ExpressionArithmetique e = new ConstanteSymbolique("e");
-
-		ExpressionArithmetique cosinusExpo = new Cos(e);
-		ExpressionArithmetique cosinusPi = new Cos(pi);
-
-		assertEquals(3.14, pi.calculer(), 0.01);
-
 		// test 1 + pi
 
 		ExpressionArithmetique piAddition = new Pi("pi");
-		
 
 		ExpressionArithmetique additionPietUn = new Addition(piAddition, un);
 
@@ -166,11 +141,11 @@ public class AppTest {
 		System.out.println("Ln(1) +  1 = " + additionlnEtUn.calculer());
 
 		// x*1
-		//ExpressionArithmetique UnX = new Multiplication(un, vs);
+		// ExpressionArithmetique UnX = new Multiplication(un, vs);
 		// System.out.println("1*x = "+ UnX.calculer());
 
 		// afficher une expression arithmetique
-		//System.out.println(testadd.afficher());
+		// System.out.println(testadd.afficher());
 		// test 1 + e^0
 
 		// premier test, je dois faire l'exponentielle first
@@ -182,11 +157,6 @@ public class AppTest {
 		ExpressionArithmetique expoAndOne = new Addition(un, expo);
 		System.out.println("Expo 0  + 1" + expoAndOne.calculer());
 
-		/*
-		 * VarSymbolique vr = new VarSymbolique('x'); vr.setValeur(new ConstEntiere(9));
-		 * // x = 9 VarSymbolique oui = (VaSymbolique)vr.simplifier();
-		 * System.out.println(oui.getVariable());
-		 */
 
 		// test : 1 + Sin(pi/2)
 
@@ -195,59 +165,23 @@ public class AppTest {
 		ExpressionArithmetique SinOfPiParDeux = new Sin(PiParDeux);
 		System.out.println("test : Sin(pi/2)  " + SinOfPiParDeux.calculer());
 		ExpressionArithmetique UnPlusSinOfPiParDeux = new Addition(un, SinOfPiParDeux);
-		//assertEquals(2.0, testadd.calculer(), 1);
+		// assertEquals(2.0, testadd.calculer(), 1);
 		System.out.println("test : 1 + Sin(pi/2)  " + UnPlusSinOfPiParDeux.calculer());
 
 		// test Polynome
-		
 
-		//System.out.println(poly.afficher());
-		//System.out.println(poly2.afficher());
-		//System.out.println(poly3.afficher());
-		
-		// test deriver une expression arith 
+		// System.out.println(poly.afficher());
+		// System.out.println(poly2.afficher());
+		// System.out.println(poly3.afficher());
+
+		// test deriver une expression arith
 		ExpressionArithmetique vs2 = new VarSymbolique("x");
-		
-		ExpressionArithmetique[] tabEa = {deux,un,trois};
-		ExpressionArithmetique[] tabpuissanceEA = {deux,un,trois};
-		
-		
-		ExpressionArithmetique deuxX = new Multiplication(deux,vs2);
-		System.out.println( deuxX.afficher());
-		
-		
-		//VarSymbolique[] tab4 = {vs,vs,vs,vs};
-		
-		
-		//ExpressionArithmetique poly4 = new Polynome(4,tab4,tab2);
-		//poly4.derive();
-		
-		
-		//ExpressionArithmetique poly5 = new Polynome();
-		//poly5 = poly4.getFonctionDerivee();
-		//System.out.println(poly5.afficher());
-		
-		
-		
-		//test loic question 8 
-		/*
-		ExpressionArithmetique x = new VarSymbolique("x");
-		ExpressionArithmetique y = new VarSymbolique("y");
-		VarSymbolique Y = (VarSymbolique) y;
-		ConstEntiere Un= (ConstEntiere) un;
-		Y.modifierVariable(Un.getEntier());
-		VarSymbolique X = (VarSymbolique) x;
-		X.modifierVariable(Un.getEntier());
-		ExpressionArithmetique noeud1 = new Addition(Y,un);
-		ExpressionArithmetique noeud2 = new Division(X,noeud1);
-		ExpressionArithmetique noeud3 = new Addition(un,noeud2);
-		
-		double n = noeud3.calculer();
-		Object N = (Object) n;
-		
-		assertEquals(1.5, N);
-		
-		*/
+
+		ExpressionArithmetique[] tabEa = { deux, un, trois };
+		ExpressionArithmetique[] tabpuissanceEA = { deux, un, trois };
+
+		ExpressionArithmetique deuxX = new Multiplication(deux, vs2);
+		System.out.println(deuxX.afficher());
 
 	}
 
@@ -268,20 +202,9 @@ public class AppTest {
 		ExpressionArithmetique results = new ConstRationnelle(550, 17);
 
 		ExpressionArithmetique divide = new Division(six, cr);
-		ExpressionArithmetique pi = new ConstanteSymbolique("pi");
+		ExpressionArithmetique pi = new Pi("pi");
 
 		ExpressionArithmetique division = new Division(pi, trois);
-
-		// element neutre
-		//ExpressionArithmetique neutreDiv = new Division(trois, un);
-		//ExpressionArithmetique neutreMul = new Multiplication(trois, un);
-		//ExpressionArithmetique neutreAdd = new Addition(trois, un);
-		//ExpressionArithmetique neutreSous = new Soustraction(trois, un);
-
-		//assertEquals(3.0, neutreDiv.calculer(), 1);
-		//assertEquals(3.0, neutreAdd.calculer(), 1);
-		//assertEquals(3.0, neutreMul.calculer(), 1);
-		//assertEquals(3.0, neutreSous.calculer(), 1);
 
 		// egaliteAr à revoir !!! __________________
 
@@ -293,8 +216,119 @@ public class AppTest {
 		assertEquals(false, expression1.equals(expression2));
 
 		// System.out.println(divide.calculer());
-		// System.out.println(division.calculer());  ????
-
+		// System.out.println(division.calculer()); ????
 
 	}
+	
+	
+	@Test
+	public void question_13_14() {
+
+		ExpressionArithmetique deux = new ConstEntiere(2);
+		ExpressionArithmetique trois = new ConstEntiere(3);
+		ExpressionArithmetique cinq = new ConstEntiere(5);
+		ExpressionArithmetique dix = new ConstEntiere(10);
+		ExpressionArithmetique quatre = new ConstEntiere(4);
+
+		ExpressionArithmetique vs = new VarSymbolique("x");
+
+		ExpressionArithmetique puissance = new Puissance(vs, deux);
+		ExpressionArithmetique multiplication = new Multiplication(trois, puissance);
+
+		ExpressionArithmetique puissance3 = new Puissance(vs, trois);
+		ExpressionArithmetique puissance2 = new Puissance(vs, quatre);
+
+		ExpressionArithmetique cinqx = new Multiplication(cinq, vs);
+
+		Multiplication nombre1 = new Multiplication(cinq, puissance2);
+
+		Multiplication nombre2 = new Multiplication(quatre, puissance3);
+		Multiplication nombre3 = new Multiplication(trois, puissance);
+
+		// ExpressionArithmetique cinqxpuissance = new Puissance(cinq, deux);
+
+		Polynome poly1 = new Polynome(nombre1, nombre2, nombre3, cinqx, dix);
+
+		System.out.println(poly1.derivation(3).afficher());
+		
+		
+	}
+	
+	
+
+	@Test
+	public void question_15() {
+		ExpressionArithmetique x = new VarSymbolique("x");
+		ExpressionArithmetique zero = new ConstEntiere(0);
+		ExpressionArithmetique un = new ConstEntiere(1);
+
+		// Addition x+0
+		ExpressionArithmetique elt = new Addition(x, zero);
+		ExpressionArithmetique add = new Addition(zero, x);
+		System.out.println("0+x= " + add.simplifier().afficher());
+		System.out.println("x+0= " + elt.simplifier().afficher());
+		assertEquals("x", (elt.simplifier().afficher()));
+
+		// Soustraction x-0
+		ExpressionArithmetique elt1 = new Soustraction(x, zero);
+		assertEquals("x", (elt1.simplifier().afficher()));
+
+		// Multiplication x*1
+		ExpressionArithmetique elt2 = new Multiplication(x, un);
+		assertEquals("x", (elt2.simplifier().afficher()));
+
+		// Division x/1
+		ExpressionArithmetique elt3 = new Division(x, un);
+		assertEquals("x", (elt3.simplifier().afficher()));
+
+		// Puissance x^0=1 et x^1=x
+		ExpressionArithmetique elt4 = new Puissance(x, un);
+		ExpressionArithmetique elt5 = new Puissance(x, zero);
+		assertEquals("x", (elt4.simplifier().afficher()));
+		assertEquals("1", (elt5.simplifier().afficher()));
+
+		System.out.println(elt5.simplifier().afficher());
+
+	}
+
+	@Test
+	public void question_16() {
+
+		ExpressionArithmetique x = new VarSymbolique("x");
+		ExpressionArithmetique deux = new ConstEntiere(2);
+		ExpressionArithmetique undemi = new ConstRationnelle(1, 2);
+
+		ExpressionArithmetique add = new Addition(x, undemi);
+		ExpressionArithmetique multi = new Multiplication(deux, add);
+
+		assertEquals("(2x+1)", multi.simplifier().afficher());
+
+		ExpressionArithmetique sous = new Soustraction(x, undemi);
+		ExpressionArithmetique multi2 = new Multiplication(deux, sous);
+
+		assertEquals("(2x-1)", multi2.simplifier().afficher());
+
+	}
+	
+	@Test
+	public void question_17() {
+		ExpressionArithmetique deux = new ConstEntiere(2);
+		ExpressionArithmetique un = new ConstEntiere(1);
+		ExpressionArithmetique neuf = new ConstEntiere(9);
+		
+		ExpressionArithmetique x = new VarSymbolique("x");
+        ExpressionArithmetique unplusx = new Addition(un, x);
+        ExpressionArithmetique unplusunplusx = new Addition(un, unplusx);
+        ExpressionArithmetique test = new Addition(neuf, neuf);
+
+        ExpressionArithmetique undemi = new ConstRationnelle(1,2);
+        ExpressionArithmetique undemix = new Multiplication(undemi,x);
+        ExpressionArithmetique mult = new Multiplication(deux,undemix);
+
+
+        System.out.println(mult.simplifier().afficher());
+		
+		
+	}
+
 }
