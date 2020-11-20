@@ -11,6 +11,11 @@ public class Multiplication extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, ConstEntiere droite) {
 		return new ConstRationnelle(droite.getEntier() * gauche.getNumerateur(), gauche.getDenominateur()).simplifier();
 	}
+	
+	@Override
+    protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
+        return new ConstRationnelle(gauche.getEntier()*droite.getNumerateur(),droite.getDenominateur()).simplifier();
+    }
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, ConstRationnelle droite) {
@@ -102,11 +107,6 @@ public class Multiplication extends OperationBinaire {
 	}
 
 	@Override
-	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
-		return this.simplifie(droite, gauche).simplifier();
-	}
-
-	@Override
     public String afficher() {
         if (eaLeft instanceof VarSymbolique) {
             return eaRight.afficher()+""+eaLeft.afficher();
@@ -119,10 +119,33 @@ public class Multiplication extends OperationBinaire {
         return "(" + eaLeft.afficher() + "*" + eaRight.afficher()+ ")";
     }
 
+	
 	@Override
-	public void derive() {
-		// TODO Auto-generated method stub
+	public boolean equals(Object expr2) {
+		if (this == expr2) {
+			return true;
 
+		}
+
+		if (expr2 == null) {
+			return false;
+		}
+
+		if (getClass() != expr2.getClass()) {
+
+			return false;
+
+		}
+		String result = ((Multiplication) expr2).afficher();
+		String result2 = this.afficher();
+		int comparaison = result.compareTo(result2);
+		
+		if(comparaison == 0) {
+			return true; 
+		}
+		return false; 
+		
+		
 	}
 
 }

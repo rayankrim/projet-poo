@@ -40,5 +40,14 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 		} else {
 			return this;
 		}
+		
+		
+		
+	}
+	
+	@Override
+	public boolean equals(Object expr2) {
+		return this == expr2;
+
 	}
 }

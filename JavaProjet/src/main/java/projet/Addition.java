@@ -2,6 +2,7 @@
 package projet;
 
 public class Addition extends OperationBinaire {
+	
 
 	public Addition(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
 		super(eaLeft, eaRight);
@@ -90,17 +91,41 @@ public class Addition extends OperationBinaire {
 		return "(" + eaLeft.afficher() + "+" + eaRight.afficher() + ")";
 
 	}
+	
 
 	@Override
 	public boolean equals(Object expr2) {
+		
+		
 
-		return false;
+		if (this == expr2) {
+			return true;
+
+		}
+
+		if (expr2 == null) {
+			return false;
+		}
+
+		if (getClass() != expr2.getClass()) {
+
+			return false;
+
+		}
+		//System.out.println(((Addition) expr2).afficher());
+		//System.out.println(this.afficher());
+		String result = ((Addition) expr2).afficher();
+		String result2 = this.afficher();
+		int comparaison = result.compareTo(result2);
+		
+		if(comparaison == 0) {
+			return true; 
+		}
+		return false; 
+		
+		
 	}
-
-	@Override
-	public void derive() {
-		// TODO Auto-generated method stub
-
-	}
+	
+	
 
 }

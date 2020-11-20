@@ -46,9 +46,33 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 
 	@Override
 	public boolean equals(Object expr2) {
-		// TODO Auto-generated method stub
-		return false;
+
+		if (this == expr2) {
+			return true;
+
+		}
+
+		if (expr2 == null) {
+			return false;
+		}
+
+		if (getClass() != expr2.getClass()) {
+
+			return false;
+
+		}
+		String result = ((ConstRationnelle) expr2).afficher();
+		String result2 = this.afficher();
+		int comparaison = result.compareTo(result2);
+		
+		if(comparaison == 0) {
+			return true; 
+		}
+		return false; 
+		
+		
 	}
+	
 
 	
 	
@@ -59,11 +83,5 @@ public final class ConstRationnelle implements ExpressionArithmetique {
         return "(" + numerateur + "/" + denominateur + ")";
 
 }
-
-	@Override
-	public void derive() {
-		// TODO Auto-generated method stub
-
-	}
 
 }

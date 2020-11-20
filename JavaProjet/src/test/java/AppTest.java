@@ -27,6 +27,8 @@ import projet.RacineCarre;
  * Unit test for simple App.
  */
 public class AppTest {
+	
+	
 
 	@Test
 	public void simpleSum() {
@@ -219,6 +221,118 @@ public class AppTest {
 		// System.out.println(division.calculer()); ????
 
 	}
+
+	@Test
+	public void question_7() {
+		//TEST ADDITION 
+		ExpressionArithmetique un = new ConstEntiere(1);
+		ExpressionArithmetique deux = new ConstEntiere(2);
+		ExpressionArithmetique trois = new ConstEntiere(3);
+		
+		ExpressionArithmetique add = new Addition(deux,trois);
+		ExpressionArithmetique add2 = new Addition(deux,trois);	
+		ExpressionArithmetique add3 = new Addition(deux,deux);	
+		
+		assertEquals(true, add.equals(add2));
+		assertEquals(false, add.equals(add3));
+		
+		//TEST CR 
+		ExpressionArithmetique cr1 = new ConstRationnelle(1,2);	
+		ExpressionArithmetique cr2 = new ConstRationnelle(1,2);	
+		ExpressionArithmetique cr3 = new ConstRationnelle(1,4);	
+		
+		assertEquals(true, cr1.equals(cr2));
+		assertEquals(false, cr1.equals(cr3));
+		
+		//TEST DIVISION 
+		ExpressionArithmetique div1 = new Division(un,deux);
+		ExpressionArithmetique div2 = new Division(un,deux);
+		ExpressionArithmetique div3 = new Division(un,trois);
+		
+		assertEquals(true, div1.equals(div2));
+		assertEquals(true, div1.simplifier().equals(div2.simplifier()));
+		assertEquals(false, div1.equals(div3));
+		
+		//TEST COS 
+		ExpressionArithmetique cos1 = new Cos(un);
+		ExpressionArithmetique cos2 = new Cos(un);
+		ExpressionArithmetique cos3 = new Cos(deux);
+		assertEquals(true, cos1.equals(cos2));
+		assertEquals(false, cos1.equals(cos3));
+		
+		//TEST EXPONENTIELLE
+		ExpressionArithmetique exp1 = new Exponentielle(un);
+		ExpressionArithmetique exp2 = new Exponentielle(un);
+		ExpressionArithmetique exp3 = new Exponentielle(trois);
+		assertEquals(true, exp1.equals(exp2));
+		assertEquals(false, exp1.equals(exp3));
+		
+		//TEST LN 
+		ExpressionArithmetique ln1 = new Ln(un);
+		ExpressionArithmetique ln2 = new Ln(un);
+		ExpressionArithmetique ln3 = new Ln(trois);
+		assertEquals(true, ln1.equals(ln2));
+		assertEquals(false, ln1.equals(ln3));
+		
+		//TEST MULTIPLICATION 
+		ExpressionArithmetique mult1 = new Multiplication(un,deux);
+		ExpressionArithmetique mult2 = new Multiplication(un,deux);
+		ExpressionArithmetique mult3 = new Multiplication(un,trois);
+		assertEquals(true, mult1.equals(mult2));
+		assertEquals(false, mult1.equals(mult3));
+		
+		
+		//TEST PI 
+		ExpressionArithmetique pi1 = new Pi("pi");
+		ExpressionArithmetique pi2 = new Pi("pi");
+		assertEquals(true, pi1.equals(pi2));
+		
+		//TEST POLY
+		ExpressionArithmetique poly1 = new Polynome(mult1,mult2);
+		ExpressionArithmetique poly2 = new Polynome(mult1,mult2);
+		ExpressionArithmetique poly3 = new Polynome(mult1,mult3);
+		assertEquals(true, poly1.equals(poly2));
+		assertEquals(false, poly1.equals(poly3));
+		
+		//TEST PUISSANCE 
+		ExpressionArithmetique p1 = new Puissance(un,deux);
+		ExpressionArithmetique p2 = new Puissance(un,deux);
+		ExpressionArithmetique p3 = new Puissance(un,trois);
+		assertEquals(true, p1.equals(p2));
+		assertEquals(false, p1.equals(p3));
+		
+		//TEST RACINE CARRE
+		ExpressionArithmetique rc1 = new RacineCarre(un);
+		ExpressionArithmetique rc2 = new RacineCarre(un);
+		ExpressionArithmetique rc3 = new RacineCarre(trois);
+		assertEquals(true, rc1.equals(rc2));
+		assertEquals(false, rc1.equals(rc3));
+		
+		//TEST SINUS
+		ExpressionArithmetique sin1 = new Sin(un);
+		ExpressionArithmetique sin2 = new Sin(un);
+		ExpressionArithmetique sin3 = new Sin(trois);
+		assertEquals(true, sin1.equals(sin2));
+		assertEquals(false, sin1.equals(sin3));
+		
+		//TEST SOUSTRACTION
+		ExpressionArithmetique s1 = new Soustraction(deux,un);
+		ExpressionArithmetique s2 = new Soustraction(deux,un);
+		ExpressionArithmetique s3 = new Soustraction(trois,un);
+		assertEquals(true, s1.equals(s2));
+		assertEquals(false, s1.equals(s3));
+		
+		//TEST VARSYMBO
+		ExpressionArithmetique vs1 = new VarSymbolique("x");
+		ExpressionArithmetique vs2 = new VarSymbolique("x");
+		ExpressionArithmetique vs3 = new VarSymbolique("y");
+		assertEquals(true, vs1.equals(vs2));
+		assertEquals(false, vs1.equals(vs3));
+		
+		
+	}
+	
+	
 	
 	
 	@Test
@@ -330,5 +444,11 @@ public class AppTest {
 		
 		
 	}
+	
+	
+	
+	
+	
+	
 
 }

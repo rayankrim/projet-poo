@@ -5,6 +5,10 @@ import java.util.Collections;
 
 public class Polynome implements ExpressionArithmetique {
 
+	public ArrayList<ExpressionArithmetique> getListe() {
+		return liste;
+	}
+
 	private final ArrayList<ExpressionArithmetique> liste = new ArrayList<ExpressionArithmetique>();
 
 	// constructeur EA
@@ -92,41 +96,54 @@ public class Polynome implements ExpressionArithmetique {
 		return add.simplifier();
 	}
 
-	@Override
-	public ExpressionArithmetique simplifier() { // il faut pv la simplifier
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public double calculer() { // calculer l'égalité
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public boolean equals(Object expr2) {
-		// TODO Auto-generated method stub
-		return false;
+		if (this == expr2) {
+			return true;
+
+		}
+
+		if (expr2 == null) {
+			return false;
+		}
+
+		if (getClass() != expr2.getClass()) {
+
+			return false;
+
+		}
+		String result = ((Polynome) expr2).afficher();
+		String result2 = this.afficher();
+		int comparaison = result.compareTo(result2);
+		
+		if(comparaison == 0) {
+			return true; 
+		}
+		return false; 
+		
+		
 	}
 
+	//non utilisées car les polynomes sont composés de multiplication et d'addition 
+	
 	@Override
 	public String afficher() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.getListe()+"";
 	}
+	
+	@Override
+	public ExpressionArithmetique simplifier() { 
+		return this;
+	}
+
 
 	@Override
-	public void derive() {
-		// TODO Auto-generated method stub
-
+	public double calculer() { 
+		return 0;
 	}
-
 	
 
-
-
-
-	
 
 }

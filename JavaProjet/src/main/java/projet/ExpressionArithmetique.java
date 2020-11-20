@@ -6,9 +6,6 @@ public interface ExpressionArithmetique {
 	public double calculer();
 
 	public String afficher();
-
-	public void derive();
-
 	public boolean equals(Object expr2);
 
 }
