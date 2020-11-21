@@ -2,6 +2,27 @@ package projet;
 
 public class Sin extends OperationUnaire {
 
+	
+	@Override
+	protected ExpressionArithmetique simplifie(Division div) {
+		double int1 = Math.sin(div.calculer());
+		long long1 = Math.round(int1); 
+		int int2 = (int)long1; 
+		return new ConstEntiere(int2);
+	}
+	
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere nb) {
+		return isNeutre(nb);
+	}
+	
+	@Override
+	protected ExpressionArithmetique simplifie(ConstRationnelle nb) {
+		
+		return super.simplifie(nb);
+	}
+
 	public Sin(ExpressionArithmetique ea) {
 		super(ea);
 	}
@@ -28,9 +49,7 @@ public class Sin extends OperationUnaire {
 			return false;
 
 		}
-		String result = ((Sin) expr2).afficher();
-		String result2 = this.afficher();
-		int comparaison = result.compareTo(result2);
+		int comparaison = ((Sin) expr2).afficher().compareTo(this.afficher());
 		
 		if(comparaison == 0) {
 			return true; 
@@ -43,6 +62,15 @@ public class Sin extends OperationUnaire {
 	@Override
 	public String afficher() {
 		return "sin(" + ea.afficher() + ")";
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere ce) {
+		if(ce.getEntier()== 0) {
+			
+			return new ConstEntiere(0);
+		}
+		return new Sin(ce);
 	}
 
 	

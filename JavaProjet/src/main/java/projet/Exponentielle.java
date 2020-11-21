@@ -6,21 +6,7 @@ public class Exponentielle extends OperationUnaire {
 		super(ea);
 	}
 
-	@Override
-	protected ExpressionArithmetique simplifie(ExpressionArithmetique nb) {
-		
-		return super.simplifie(nb);
-	}
-
-	@Override
-	protected ExpressionArithmetique simplifie(ConstEntiere nb) {
-		return super.simplifie(nb);
-	}
-
-	@Override
-	protected ExpressionArithmetique simplifie(ConstRationnelle nb) {
-		return super.simplifie(nb);
-	}
+	
 
 	@Override
 	public double calculer() {
@@ -46,9 +32,8 @@ public class Exponentielle extends OperationUnaire {
 			return false;
 
 		}
-		String result = ((Exponentielle) expr2).afficher();
-		String result2 = this.afficher();
-		int comparaison = result.compareTo(result2);
+		
+		int comparaison = ((Exponentielle) expr2).afficher().compareTo(this.afficher());
 		
 		if(comparaison == 0) {
 			return true; 
@@ -61,6 +46,33 @@ public class Exponentielle extends OperationUnaire {
 	public String afficher() {
 		return this.calculer()+"";
 	}
+	
+
+	@Override
+	protected ExpressionArithmetique simplifie(ExpressionArithmetique nb) {
+		// TODO Auto-generated method stub
+		return super.simplifie(nb);
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere nb) {
+		
+		return isNeutre(nb);
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstRationnelle nb) {
+		// TODO Auto-generated method stub
+		return super.simplifie(nb);
+	}
 
 
-}
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere ce) {
+	if(ce.getEntier() == 0) {
+		
+		return new ConstEntiere(1);
+	}
+	return new Exponentielle(ce);
+		
+	}}

@@ -53,9 +53,8 @@ public final class Pi implements ExpressionArithmetique {
 			return false;
 
 		}
-		String result = ((Pi) expr2).afficher();
-		String result2 = this.afficher();
-		int comparaison = result.compareTo(result2);
+		
+		int comparaison = ((Pi) expr2).afficher().compareTo(this.afficher());
 		
 		if(comparaison == 0) {
 			return true; 

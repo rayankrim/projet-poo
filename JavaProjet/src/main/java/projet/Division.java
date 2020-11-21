@@ -90,9 +90,8 @@ public class Division extends OperationBinaire {
 			return false;
 
 		}
-		String result = ((Division) expr2).afficher();
-		String result2 = this.afficher();
-		int comparaison = result.compareTo(result2);
+		
+		int comparaison = ((Division) expr2).afficher().compareTo(this.afficher());
 		
 		if(comparaison == 0) {
 			return true; 

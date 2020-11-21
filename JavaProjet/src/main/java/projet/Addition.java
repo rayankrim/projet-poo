@@ -84,6 +84,8 @@ public class Addition extends OperationBinaire {
 		}
 		return new ConstEntiere(gauche.getEntier() + droite.getValue()).simplifier();
 	}
+	
+	
 
 	@Override
 	public String afficher() {
@@ -112,13 +114,11 @@ public class Addition extends OperationBinaire {
 			return false;
 
 		}
-		//System.out.println(((Addition) expr2).afficher());
-		//System.out.println(this.afficher());
-		String result = ((Addition) expr2).afficher();
-		String result2 = this.afficher();
-		int comparaison = result.compareTo(result2);
 		
-		if(comparaison == 0) {
+		int comparaison2 = ((Addition) expr2).afficher().compareTo(this.afficher());
+		
+		
+		if(comparaison2 == 0) {
 			return true; 
 		}
 		return false; 

@@ -45,9 +45,8 @@ public class Cos extends OperationUnaire {
 			return false;
 
 		}
-		String result = ((Cos) expr2).afficher();
-		String result2 = this.afficher();
-		int comparaison = result.compareTo(result2);
+		
+		int comparaison = ((Cos) expr2).afficher().compareTo(this.afficher());
 		
 		if(comparaison == 0) {
 			return true; 
@@ -61,6 +60,16 @@ public class Cos extends OperationUnaire {
 	public String afficher() {
 		return "cos(" + ea.afficher() + ")";
 	}
+
+
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere ce) {
+		
+		
+		
+		return null;
+	}
+
 
 	
 

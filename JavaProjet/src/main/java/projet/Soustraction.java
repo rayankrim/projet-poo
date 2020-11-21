@@ -81,9 +81,7 @@ public class Soustraction extends OperationBinaire {
 			return false;
 
 		}
-		String result = ((Soustraction) expr2).afficher();
-		String result2 = this.afficher();
-		int comparaison = result.compareTo(result2);
+		int comparaison = ((Soustraction) expr2).afficher().compareTo(this.afficher());
 		
 		if(comparaison == 0) {
 			return true; 

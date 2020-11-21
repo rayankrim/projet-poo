@@ -113,9 +113,7 @@ public class Polynome implements ExpressionArithmetique {
 			return false;
 
 		}
-		String result = ((Polynome) expr2).afficher();
-		String result2 = this.afficher();
-		int comparaison = result.compareTo(result2);
+		int comparaison = ((Polynome) expr2).afficher().compareTo(this.afficher());
 		
 		if(comparaison == 0) {
 			return true; 

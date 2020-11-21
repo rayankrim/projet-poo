@@ -60,9 +60,7 @@ public class RacineCarre extends OperationUnaire {
 			return false;
 
 		}
-		String result = ((RacineCarre) expr2).afficher();
-		String result2 = this.afficher();
-		int comparaison = result.compareTo(result2);
+		int comparaison = ((RacineCarre) expr2).afficher().compareTo(this.afficher());
 		
 		if(comparaison == 0) {
 			return true; 
@@ -75,6 +73,13 @@ public class RacineCarre extends OperationUnaire {
 	@Override
 	public String afficher() {
 		return "√" + ea.afficher();
+	}
+
+	
+	//non utilisé car il n'y pas d'élément neutre dans une racine carrée
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere ce) {
+		return null;
 	}
 
 	

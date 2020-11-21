@@ -61,9 +61,8 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 			return false;
 
 		}
-		String result = ((ConstRationnelle) expr2).afficher();
-		String result2 = this.afficher();
-		int comparaison = result.compareTo(result2);
+		
+		int comparaison = ((ConstRationnelle) expr2).afficher().compareTo(this.afficher());
 		
 		if(comparaison == 0) {
 			return true; 

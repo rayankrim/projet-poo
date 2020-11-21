@@ -91,9 +91,7 @@ public class Puissance extends OperationBinaire {
 			return false;
 
 		}
-		String result = ((Puissance) expr2).afficher();
-		String result2 = this.afficher();
-		int comparaison = result.compareTo(result2);
+		int comparaison = ((Puissance) expr2).afficher().compareTo(this.afficher());
 		
 		if(comparaison == 0) {
 			return true; 
