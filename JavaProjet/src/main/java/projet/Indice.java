@@ -8,7 +8,7 @@ public class Indice extends OperationBinaire{
 
 	@Override
 	public double calculer() {
-		return 0;
+		throw new RuntimeException("Les calculs des indices ne peut se faire.");
 	}
 	
 	@Override

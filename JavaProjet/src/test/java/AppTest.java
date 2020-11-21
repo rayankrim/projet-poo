@@ -15,8 +15,10 @@ import projet.Indice;
 import projet.Ln;
 import projet.Multiplication;
 import projet.OperationBinaire;
+import projet.Produit;
 import projet.Puissance;
 import projet.Sin;
+import projet.Somme;
 import projet.Soustraction;
 import projet.VarSymbolique;
 
@@ -26,84 +28,105 @@ import projet.VarSymbolique;
 public class AppTest {
 
 	@Test
-	public void question_12() {
-		ExpressionArithmetique a = new VarSymbolique("a");
+	public void produitQuestion12() {
+		ExpressionArithmetique alpha = new VarSymbolique("alpha");
+		ExpressionArithmetique x = new VarSymbolique("x");
+		ExpressionArithmetique i = new VarSymbolique("i");
+		ExpressionArithmetique alphaI= new Indice(alpha,i);
+		ExpressionArithmetique xI = new Puissance(x,i);
+		ExpressionArithmetique Max= new ConstEntiere(4);
+
+		ConstEntiere max = (ConstEntiere) Max;
+		
+		ExpressionArithmetique prodAlphaI= new Produit(alphaI, max);
+		ExpressionArithmetique prodXI= new Produit(xI, max);
+		ExpressionArithmetique exceptResult= new Multiplication(prodAlphaI,prodXI);
+		
+		ExpressionArithmetique multi= new Multiplication(alphaI,xI);
+		ExpressionArithmetique testResult= new Produit(multi,max);
+		
+		String eResult=exceptResult.simplifier().afficher();
+		assertEquals(eResult,testResult.simplifier().afficher());
+	}
+	//alpha(0)*alpha(1)*alpha(2)*alpha(3)*alpha(4)*x^10
+/*	@Test
+	public void sommeQuestion11V2() {
+		ExpressionArithmetique alpha = new VarSymbolique("alpha");
+		ExpressionArithmetique x = new VarSymbolique("x");
+		ExpressionArithmetique i = new VarSymbolique("i");
+		ExpressionArithmetique alphaI= new Indice(alpha,i);
+		ExpressionArithmetique xI = new Puissance(x,i);
+		ExpressionArithmetique Max= new ConstEntiere(4);
+
+		ConstEntiere max = (ConstEntiere) Max;
+		
+		ExpressionArithmetique multi= new Multiplication(alphaI,xI);
+		ExpressionArithmetique sum= new Somme(multi,max);
+		
+		String sum2="alpha(0)*x^0+alpha(1)*x^1+alpha(2)*x^2+alpha(3)*x^3+alpha(4)*x^4";
+		assertEquals(sum2,sum.simplifier().afficher());
+	}
+*/	
+	
+	
+/*	@Test
+	public void question_12V3() {
+		ExpressionArithmetique alpha = new VarSymbolique("alpha");
 		ExpressionArithmetique x= new VarSymbolique("x");
-		ExpressionArithmetique deb= new ConstEntiere(0);
+		ExpressionArithmetique debut= new ConstEntiere(0);
 		ExpressionArithmetique fin= new ConstEntiere(4);
+
+		System.out.println(Arrays.toString(somme));
+		
+			
+		ExpressionArithmetique i= new VarSymbolique("i");
+		ExpressionArithmetique i2= new VarSymbolique("i");
+		
 		ConstEntiere d=(ConstEntiere) deb;
 		ConstEntiere f=(ConstEntiere) fin;
+		VarSymbolique I=(VarSymbolique) i;
+		VarSymbolique I2=(VarSymbolique) i2;
 		String Somme=new String();
+		int compteurPuissance=0;
 		
-		for(int i=d.getEntier();i<=f.getEntier();i=i+2) {
-			ExpressionArithmetique compteur=new ConstEntiere(i);
-			ConstEntiere c=(ConstEntiere) compteur;
-			ExpressionArithmetique indice= new Indice(a,c);
-			
-			if(i!=f.getEntier()) {
-				ExpressionArithmetique compteurSuivant=new ConstEntiere(i+1);
-				ConstEntiere cSuivant=(ConstEntiere) compteurSuivant;
-				ExpressionArithmetique indiceSuivant= new Indice(a,cSuivant);
+		for(int j=d.getEntier();j<=f.getEntier();j+=2) {
+			I.setValue(j);
+			ExpressionArithmetique indice= new Indice(alpha,I);
 
+			if(j!=f.getEntier()) {
+				I2.setValue(j+1);
+				ExpressionArithmetique indiceSuivant= new Indice(alpha,I2);
 				ExpressionArithmetique produit=new Multiplication(indice,indiceSuivant);
 				Somme+=produit.afficher()+"*";
-			}else {
-				Somme+=indice.afficher()+"*";
+				compteurPuissance+=(I.getValue()+I2.getValue());
+			} else {
+				Somme+=indice.afficher();
+				compteurPuissance+=I.getValue();
 			}
 		}
-		int I=0;
-		for(int i=d.getEntier();i<=f.getEntier();i++) {
-			I+=i;
-		}
-		ExpressionArithmetique compteur=new ConstEntiere(I);
-		ConstEntiere c=(ConstEntiere) compteur;
-		ExpressionArithmetique puissance= new Puissance(x,c);
-		Somme+=puissance.afficher();
 		
-	//	System.out.println(Somme);
-	//	assertEquals("a(0)*x^0+a(1)*x^1+a(2)*x^2+a(3)*x^3+a(4)*x^4",Somme);
-		assertEquals("a(0)*a(1)*a(2)*a(3)*a(4)*x^10",Somme);
+
+		I.setValue(compteurPuissance);
+		ExpressionArithmetique puissance= new Puissance(x,I);
+		Somme+="*"+puissance.afficher();
+		
+		
+	//	assertEquals("alpha(0)*alpha(1)*alpha(2)*alpha(3)*alpha(4)*x^10",somme);
 	}
+*/
 	
-	/*	@Test
-	public void question_11() {
-		ExpressionArithmetique a = new VarSymbolique("a");
-		ExpressionArithmetique x= new VarSymbolique("x");
-		ExpressionArithmetique deb= new ConstEntiere(0);
-		ExpressionArithmetique fin= new ConstEntiere(4);
-		ConstEntiere d=(ConstEntiere) deb;
-		ConstEntiere f=(ConstEntiere) fin;
-		String Somme=new String();
-		for(int i=d.getEntier();i<=f.getEntier();i++) {
-			ExpressionArithmetique compteur=new ConstEntiere(i);
-			ConstEntiere c=(ConstEntiere) compteur;
-			ExpressionArithmetique puissance= new Puissance(x,c);
-			ExpressionArithmetique indice= new Indice(a,c);
-			ExpressionArithmetique produit=new Multiplication(indice,puissance);
-			
-			if(i!=f.getEntier()) {
-				Somme+=produit.afficher()+"+";
-			}else {
-				Somme+=produit.afficher();
-			}
-		}
-		
-		System.out.println(Somme);
-		assertEquals("a(0)*x^0+a(1)*x^1+a(2)*x^2+a(3)*x^3+a(4)*x^4",Somme);
-		
-	}*/
-	
-	// question 8: calcul d'une EA avec des Varsymbolique dont on connait la valeur.
-/*	@Test
-	public void question_7() {
+/*	// question 8: calcul d'une EA avec des Varsymbolique dont on connait la valeur.
+	@Test
+	public void question_8() {
 		
 		ExpressionArithmetique un = new ConstEntiere(1);
 		ExpressionArithmetique x = new VarSymbolique("x");
 		ExpressionArithmetique y = new VarSymbolique("y");
+		
 		ConstEntiere Un= (ConstEntiere) un;
 		VarSymbolique X = (VarSymbolique) x;
-		X.setValue(Un.getEntier());
 		VarSymbolique Y = (VarSymbolique) y;
+		X.setValue(Un.getEntier());
 		Y.setValue(Un.getEntier());
 		
 		OperationBinaire noeud1 = new Addition(Y,un);
@@ -112,8 +135,8 @@ public class AppTest {
 	
 		assertEquals(3,((ConstRationnelle) noeud3.simplifier()).getNumerateur());
 		assertEquals(2,((ConstRationnelle) noeud3.simplifier()).getDenominateur());
-	}*/ 
-	
+	}
+*/	
 
 /*	@Test
 	public void simpleSum() {

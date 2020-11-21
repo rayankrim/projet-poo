@@ -7,7 +7,7 @@ public class Addition extends OperationBinaire {
 		super(eaLeft, eaRight);
 
 	}
-
+	
 	@Override
 	public double calculer() {
 		return this.eaLeft.calculer() + this.eaRight.calculer();
@@ -42,20 +42,23 @@ public class Addition extends OperationBinaire {
 	}
 	
 	@Override
-	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
-		if(gauche.isValueNull())
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, VarSymbolique droite) {
+		if(gauche.isValueNull()==false && droite.isValueNull()==false)
+			return new ConstEntiere(gauche.getValue() + droite.getValue()).simplifier();
+		else if(gauche.isValueNull()==false && droite.isValueNull())
+			return gauche.simplifier();
+		else if(gauche.isValueNull() && droite.isValueNull()==false)
+			return droite.simplifier();
+		else
 			return this;
-		else// dans le cas où on connait la valeur de x.
-			return new ConstEntiere(gauche.getValue() + droite.getEntier()).simplifier();
 	}
 	
-	/*static String doSomme(VarSymbolique left, VarSymbolique right, ConstEntiere iDebut, ConstEntiere iFin) {
-		String s="";
-		for(int i= iDebut.getEntier(); i<=iFin.getEntier(); i++) {
-			s+="+"+Addition(left,right);
-		}
-	}*/
-
+	@Override
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
+		return this;
+			
+	}
+	
 	@Override
 	public String afficher() {
 		// TODO Auto-generated method stub

@@ -4,7 +4,6 @@ public class Multiplication extends OperationBinaire {
 
 	public Multiplication(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
 		super(eaLeft, eaRight);
-
 	}
 
 	@Override
@@ -32,10 +31,14 @@ public class Multiplication extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
 		return this.simplifie(droite, gauche).simplifier();
 	}
-
+	
+	@Override
+	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ExpressionArithmetique droite) {
+		return this;
+	}
 	@Override
 	public String afficher() {
-		return eaLeft.afficher() + "*" + eaRight.afficher();
+		return eaLeft.afficher()+"*"+eaRight.afficher();
 	}
 
 	

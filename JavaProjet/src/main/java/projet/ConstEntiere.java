@@ -3,6 +3,7 @@ package projet;
 public final class ConstEntiere implements ExpressionArithmetique {
 
 	private final int entier;
+	
 	public ConstEntiere(int value) {
 		this.entier = value;
 	}

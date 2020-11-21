@@ -37,6 +37,10 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 		return this;
 	}
 	
+	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ConstEntiere droite) {
+		return this;
+	}
+	
 	@Override
 	public ExpressionArithmetique simplifier() {
 
@@ -51,23 +55,15 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 		} else if (this.eaLeft instanceof ConstRationnelle && this.eaRight instanceof ConstRationnelle) {
 			ConstRationnelle gauche = (ConstRationnelle) this.eaLeft;
 			ConstRationnelle droite = (ConstRationnelle) this.eaRight;
-
 			res = simplifie(gauche, droite);
-
-		} else if (this.eaLeft instanceof ConstRationnelle && this.eaRight instanceof ConstEntiere)
-
-		{
+		} else if (this.eaLeft instanceof ConstRationnelle && this.eaRight instanceof ConstEntiere){
 			ConstRationnelle gauche = (ConstRationnelle) this.eaLeft;
 			ConstEntiere droite = (ConstEntiere) this.eaRight;
-
 			res = simplifie(gauche, droite);
-
 		} else if (this.eaLeft instanceof ConstEntiere && this.eaRight instanceof ConstRationnelle) {
 			ConstEntiere gauche = (ConstEntiere) this.eaLeft;
 			ConstRationnelle droite = (ConstRationnelle) this.eaRight;
-
 			res = simplifie(gauche, droite);
-
 		} else if (this.eaLeft instanceof VarSymbolique && this.eaRight instanceof ConstEntiere) {
 			VarSymbolique gauche= (VarSymbolique) this.eaLeft;
 			ConstEntiere droite= (ConstEntiere) this.eaRight;
@@ -76,9 +72,10 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 			VarSymbolique gauche=(VarSymbolique) this.eaLeft;
 			VarSymbolique droite=(VarSymbolique) this.eaRight;
 			res=simplifie(gauche,droite);
-		}
-
-		else {
+		}else if(this.eaRight instanceof ConstEntiere){
+			ConstEntiere droite=(ConstEntiere) this.eaRight;
+			res=simplifie(this.eaLeft,droite);
+		}else {
 			res = this;
 		}
 

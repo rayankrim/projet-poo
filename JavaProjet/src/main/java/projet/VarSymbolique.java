@@ -4,8 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public final class VarSymbolique implements ExpressionArithmetique {
-
-    private final String variable;
+	private final String variable;
     private ExpressionArithmetique value;
 
 
@@ -14,13 +13,16 @@ public final class VarSymbolique implements ExpressionArithmetique {
         tableauAssociatifVarS.put("x","x");
         tableauAssociatifVarS.put("y","y");
         tableauAssociatifVarS.put("z","z");
-        tableauAssociatifVarS.put("a","a");
+        tableauAssociatifVarS.put("alpha","alpha");
+        tableauAssociatifVarS.put("i","i");
+     //   tableauAssociatifVarS.put("i2","i2");
         this.variable = tableauAssociatifVarS.get(variable);
     }
     
     public String getVariable() {
         return this.variable;
     }
+    
     public int getValue() {
     	if(isValueNull())
     		throw new RuntimeException("Impossible de donner la valeur d'un x qui n'a pas de valeur.");
@@ -44,7 +46,7 @@ public final class VarSymbolique implements ExpressionArithmetique {
     @Override
     public double calculer() {
     	if(isValueNull())
-    		throw new RuntimeException("Impossible de calculer un x qui n'a pas de valeur.");
+    		throw new RuntimeException("Impossible de calculer une varibale symbolique qui n'a pas de valeur.");
     	else
     		return this.value.calculer();
     	
@@ -59,7 +61,10 @@ public final class VarSymbolique implements ExpressionArithmetique {
     
 	@Override
 	public String afficher() {
-		return this.getVariable();
+		if(this.isValueNull())
+			return this.getVariable();
+		else
+			return this.getValue()+"";
 	}
 
 /*

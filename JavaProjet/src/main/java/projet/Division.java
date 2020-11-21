@@ -8,7 +8,10 @@ public class Division extends OperationBinaire {
 
 	@Override
 	public double calculer() {
-		return this.eaLeft.calculer() / this.eaRight.calculer();
+		if(this.eaRight.calculer() == 0)
+			throw new RuntimeException("Impossible d'effectuer une division par 0");
+		else
+			return this.eaLeft.calculer() / this.eaRight.calculer();
 	}
 
 	@Override
@@ -29,12 +32,18 @@ public class Division extends OperationBinaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstEntiere droite) {
-		return new ConstRationnelle(gauche.getEntier(), droite.getEntier()).simplifier();
+		if(gauche.getEntier()==0)
+			throw new RuntimeException("Division par 0 impossible.");
+		else
+			return new ConstRationnelle(gauche.getEntier(), droite.getEntier()).simplifier();
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
-		return new ConstRationnelle(gauche.getValue(), droite.getEntier()).simplifier();
+		if(droite.getEntier()==0)
+			throw new RuntimeException("Division par 0 impossible.");
+		else
+			return new ConstRationnelle(gauche.getValue(), droite.getEntier()).simplifier();
 	}
 
 	@Override
