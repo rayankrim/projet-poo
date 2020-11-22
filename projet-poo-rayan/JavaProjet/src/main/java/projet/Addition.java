@@ -1,0 +1,155 @@
+
+package projet;
+
+public class Addition extends OperationBinaire {
+	
+
+
+	public Addition(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
+		super(eaLeft, eaRight);
+
+	}
+
+	@Override
+	public double calculer() {
+
+		double approximation = this.eaLeft.calculer() + this.eaRight.calculer();
+
+		approximation = Math.round(approximation * 10000);
+
+		return approximation / 10000;
+
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, ConstEntiere droite) {
+		return new ConstRationnelle(gauche.getNumerateur() * droite.getEntier() + gauche.getDenominateur() * 1,
+				1 * gauche.getDenominateur()).simplifier();
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, ConstRationnelle droite) {
+		return new ConstRationnelle(
+				gauche.getNumerateur() * droite.getDenominateur() + gauche.getDenominateur() * droite.getNumerateur(),
+				droite.getDenominateur() * gauche.getDenominateur()).simplifier();
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstEntiere droite) {
+		return new ConstEntiere(gauche.getEntier() + droite.getEntier()).simplifier();
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
+
+		return simplifie(droite, gauche).simplifier();
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Addition droite) {
+		return new Addition(new Addition(gauche, droite.eaLeft).simplifier(), droite.eaRight);
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(Addition gauche, ConstEntiere droite) {
+		return new Addition(gauche.eaRight, new Addition(gauche.eaLeft, droite).simplifier());
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Multiplication droite) {
+		
+		return this.isNeutre();
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
+		if(gauche.isValueNull() == false) {
+			return new ConstEntiere(gauche.getValue() + droite.getEntier()).simplifier();
+		}
+		return this.isNeutre();
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere eaLeft, VarSymbolique droite) {
+		if (droite.isValueNull() == false) {
+			return new ConstEntiere(droite.getValue() + eaLeft.getEntier()).simplifier();
+		}
+		return this.isNeutre();
+	}
+	
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ExpressionArithmetique droite) {
+		return this.isNeutre();
+	}
+	
+	@Override
+	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ConstEntiere droite) {
+		return this.isNeutre();
+	}
+	
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, VarSymbolique droite) {
+		return super.simplifie(gauche, droite);
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstRationnelle droite) {
+		return super.simplifie(gauche, droite);
+	}
+
+	
+	@Override
+    public ExpressionArithmetique isNeutre() { 
+        if(this.eaLeft.equals(new ConstEntiere(0))) {
+            return this.eaRight;
+        }else if(this.eaRight.equals(new ConstEntiere(0)) ) {
+            return this.eaLeft;
+        }
+        return this;
+    }
+	
+
+	@Override
+	public String afficher() {
+		
+		return "(" + eaLeft.afficher() + "+" + eaRight.afficher() + ")";
+
+	}
+	
+
+	@Override
+	public boolean equals(Object expr2) {
+		
+		
+
+		if (this == expr2) {
+			return true;
+
+		}
+
+		if (expr2 == null) {
+			return false;
+		}
+
+		if (getClass() != expr2.getClass()) {
+
+			return false;
+
+		}
+		
+		int comparaison2 = ((Addition) expr2).afficher().compareTo(this.afficher());
+		
+		
+		if(comparaison2 == 0) {
+			return true; 
+		}
+		return false; 
+		
+		
+	}
+
+	
+	
+
+}
