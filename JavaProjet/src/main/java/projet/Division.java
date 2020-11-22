@@ -48,6 +48,14 @@ public class Division extends OperationBinaire {
 		return isNeutre(gauche, droite);
 	}
 	
+	@Override
+	protected ExpressionArithmetique simplifie(Multiplication gauche, ConstEntiere droite) {
+		if(gauche.eaLeft.equals(droite)) {
+			return gauche.eaRight; 
+		}
+		
+		return this.simplifier();
+	}
 	
 	
 

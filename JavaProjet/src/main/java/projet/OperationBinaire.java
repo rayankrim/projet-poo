@@ -83,21 +83,27 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 	}
 
 	public abstract ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite);
-	
-	
 
 	public abstract ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite);
 
 	public abstract ExpressionArithmetique isNeutre(ConstEntiere gauche, ExpressionArithmetique droite);
-	
-	public abstract ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite);
-	
 
+	public abstract ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite);
+
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ExpressionArithmetique droite) {
+		return this;
+	}
 
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Division droite) {
 
 		return this;
 	}
+	
+
+	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ConstEntiere droite) {
+		return this;
+	}
+
 
 	@Override
 	public ExpressionArithmetique simplifier() {
@@ -193,6 +199,15 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 			Multiplication gauche = (Multiplication) this.eaLeft;
 			ConstEntiere droite = (ConstEntiere) this.eaRight;
 			res = simplifie(gauche, droite);
+		} else if (this.eaLeft instanceof ExpressionArithmetique && this.eaRight instanceof ConstEntiere) {
+			ExpressionArithmetique gauche = (ExpressionArithmetique) this.eaLeft;
+			ConstEntiere droite = (ConstEntiere) this.eaRight;
+			res = simplifie(gauche, droite);
+			
+		} else if (this.eaLeft instanceof ConstEntiere && this.eaRight instanceof ExpressionArithmetique) {
+			ConstEntiere gauche = (ConstEntiere) this.eaLeft;
+			ExpressionArithmetique droite = (ExpressionArithmetique) this.eaRight;
+			res = simplifie(gauche, droite);
 		}
 
 		else {
@@ -208,5 +223,4 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 
 	}
 
-	
 }

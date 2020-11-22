@@ -69,6 +69,16 @@ public class Addition extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(ConstEntiere eaLeft, VarSymbolique droite) {
 		return isNeutre(eaLeft, droite);
 	}
+	
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ExpressionArithmetique droite) {
+		return isNeutre(gauche,droite);
+	}
+	
+	@Override
+	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ConstEntiere droite) {
+		return isNeutre(gauche,droite);
+	}
 
 	@Override
 	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
@@ -92,12 +102,20 @@ public class Addition extends OperationBinaire {
 		if (gauche.getEntier() == 0) {
 			return droite;
 		}
-		return droite;
+		return this;
 	}
+	
+	
 	
 	@Override
 	public ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite) {
-		return isNeutre(gauche,droite);
+		
+		if(droite.getEntier() == 0 ) {
+			
+			return gauche; 
+		}
+		
+		return this;
 	}
 	
 	

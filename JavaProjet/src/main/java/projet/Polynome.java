@@ -196,7 +196,6 @@ public class Polynome implements ExpressionArithmetique {
 			ConstEntiere m1 = (ConstEntiere) ea;
 
 			VarSymbolique vs = new VarSymbolique("x");
-			System.out.println(m1.afficher());
 			return new Multiplication(m1, vs).simplifier();
 
 		}
@@ -219,16 +218,17 @@ public class Polynome implements ExpressionArithmetique {
 
 		}
 		ConstEntiere zero = new ConstEntiere(0);
-		Addition add = new Addition(zero, zero);
+		VarSymbolique vs1 = new VarSymbolique("a");
+		Addition add = new Addition(zero, vs1);
 
 		for (int j = 0; j < listeDerivation.size(); j++) {
-
+			
 			ExpressionArithmetique intermediaire = add.simplifier();
 
-			Addition add2 = new Addition(listeDerivation.get(j), intermediaire);
-			
+			Addition add2 = new Addition(listeDerivation.get(j), intermediaire.simplifier());
 			add = add2;
 		}
+		
 		
 		return add.simplifier();
 	}

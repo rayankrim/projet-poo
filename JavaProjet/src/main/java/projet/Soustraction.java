@@ -98,13 +98,13 @@ public class Soustraction extends OperationBinaire {
 
 	@Override
 	public ExpressionArithmetique isNeutre(ConstEntiere gauche, ExpressionArithmetique droite) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

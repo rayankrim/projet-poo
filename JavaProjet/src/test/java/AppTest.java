@@ -439,13 +439,10 @@ public class AppTest {
 		Polynome poly1 = new Polynome(mult1, mult2, dix);
 		//System.out.println((poly1.derivation(0)));
 		
-		System.out.println((poly1.primitiver(1).afficher()));
+		//System.out.println((poly1.primitiver(1).afficher()));
+		assertEquals("((x^3)+(((5/2)*(x^2))+(10x+a)))",poly1.primitiver(1).afficher());
 		
 	}
-
-	
-	
-	
 	
 
 }
