@@ -28,11 +28,7 @@ public class Addition extends OperationBinaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, ConstRationnelle droite) {
-		if(gauche.getNumerateur() * droite.getDenominateur() + gauche.getDenominateur() * droite.getNumerateur()
-		/droite.getDenominateur() * gauche.getDenominateur()==1)
-			return new ConstEntiere(1).simplifier();
-		else
-			return new ConstRationnelle(
+		return new ConstRationnelle(
 				gauche.getNumerateur() * droite.getDenominateur() + gauche.getDenominateur() * droite.getNumerateur(),
 				droite.getDenominateur() * gauche.getDenominateur()).simplifier();
 	}
@@ -72,6 +68,11 @@ public class Addition extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(ConstEntiere eaLeft, VarSymbolique droite) {
 		return isNeutre(eaLeft, droite);
 	}
+	
+	@Override
+	protected ExpressionArithmetique simplifie(ConstRationnelle eaLeft, VarSymbolique droite) {
+		return isNeutre(eaLeft, droite);
+	}
 
 	@Override
 	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
@@ -90,6 +91,17 @@ public class Addition extends OperationBinaire {
 		}else if(gauche.getEntier()!=0 && droite.isValueNull()==false){
 			return new ConstEntiere(gauche.getEntier() + droite.getValue()).simplifier();
 		}else
+			return this;
+	}
+	
+	public ExpressionArithmetique isNeutre(ConstRationnelle gauche, VarSymbolique droite) {
+		if(gauche.getNumerateur()/gauche.getDenominateur() == 0 && droite.isValueNull())
+			return new VarSymbolique(droite.getVariable());
+		else if(gauche.getNumerateur()/gauche.getDenominateur() ==0 && droite.isValueNull()==false)
+			return new ConstEntiere(droite.getValue());
+		else if(gauche.getNumerateur()/gauche.getDenominateur()!=0 && droite.isValueNull()==false)
+			return new ConstEntiere(gauche.getNumerateur()/gauche.getDenominateur() + droite.getValue()).simplifier();
+		else
 			return this;
 	}
 	

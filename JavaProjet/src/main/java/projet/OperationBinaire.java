@@ -88,6 +88,8 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 	public abstract ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite);
 
 	public abstract ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite);
+	
+	public abstract ExpressionArithmetique isNeutre(ConstRationnelle gauche, VarSymbolique droite);
 
 	@Override
 	public ExpressionArithmetique simplifier() {

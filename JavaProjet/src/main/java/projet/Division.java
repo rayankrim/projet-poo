@@ -101,4 +101,10 @@ public class Division extends OperationBinaire {
 		
 	}
 
+	@Override
+	public ExpressionArithmetique isNeutre(ConstRationnelle gauche, VarSymbolique droite) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

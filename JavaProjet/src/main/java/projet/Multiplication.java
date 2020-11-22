@@ -147,4 +147,10 @@ public class Multiplication extends OperationBinaire {
 		
 	}
 
+	@Override
+	public ExpressionArithmetique isNeutre(ConstRationnelle gauche, VarSymbolique droite) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

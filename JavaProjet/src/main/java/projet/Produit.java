@@ -150,5 +150,11 @@ public class Produit extends OperationBinaire{
 		return null;
 	}
 
+	@Override
+	public ExpressionArithmetique isNeutre(ConstRationnelle gauche, VarSymbolique droite) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

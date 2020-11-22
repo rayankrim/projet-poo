@@ -96,6 +96,12 @@ public class Soustraction extends OperationBinaire {
 		return "(" + eaLeft.afficher() + "-" + eaRight.afficher() + ")";
 	}
 
+	@Override
+	public ExpressionArithmetique isNeutre(ConstRationnelle gauche, VarSymbolique droite) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

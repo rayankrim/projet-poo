@@ -123,6 +123,12 @@ public class Puissance extends OperationBinaire {
 		return this.eaLeft.afficher() + "^" + this.eaRight.afficher();
 	}
 
+	@Override
+	public ExpressionArithmetique isNeutre(ConstRationnelle gauche, VarSymbolique droite) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }
