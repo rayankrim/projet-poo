@@ -57,8 +57,6 @@ public class Somme extends OperationBinaire{
 		if(gauche instanceof Multiplication) {
 			Multiplication g=(Multiplication) gauche;
 			if(g.eaLeft instanceof Indice && g.eaRight instanceof Puissance) {
-				Indice gEaLeft= (Indice) g.eaLeft;
-				Puissance gEaRight= (Puissance) g.eaRight;
 				return this;
 			}else if(g.eaLeft instanceof Puissance && g.eaRight instanceof Puissance) {
 				Puissance gEaLeft = (Puissance) g.eaLeft;

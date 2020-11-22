@@ -209,13 +209,7 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 			ConstEntiere gauche = (ConstEntiere) this.eaLeft;
 			ExpressionArithmetique droite = (ExpressionArithmetique) this.eaRight;
 			res = simplifie(gauche, droite);
-		} else if (this.eaLeft instanceof Multiplication && this.eaRight instanceof ConstEntiere) {
-			Multiplication gauche = (Multiplication) this.eaLeft;
-			ConstEntiere droite = (ConstEntiere) this.eaRight;
-			res = simplifie(gauche, droite);
-
 		}
-
 		else {
 			res = this;
 		}

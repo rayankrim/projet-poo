@@ -25,9 +25,6 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 
 	@Override
 	public ExpressionArithmetique simplifier() {
-		if(this.numerateur == this.denominateur) {
-            return new ConstEntiere(numerateur);
-        }
 		int pgcd = gcd(this.numerateur, this.denominateur);
 		return new ConstRationnelle(this.numerateur / pgcd, this.denominateur / pgcd);
 	}

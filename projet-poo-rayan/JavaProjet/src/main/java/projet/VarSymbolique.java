@@ -15,6 +15,8 @@ public final class VarSymbolique implements ExpressionArithmetique {
 		tableauAssociatifVarS.put("z", "z");
 		tableauAssociatifVarS.put("a", "a");
 		tableauAssociatifVarS.put("b", "b");
+		tableauAssociatifVarS.put("i", "i");
+
 
 		this.variable = tableauAssociatifVarS.get(variable);
 	}
@@ -53,9 +55,12 @@ public final class VarSymbolique implements ExpressionArithmetique {
 	}
 
 	@Override
-	public String afficher() {
-		return this.getVariable();
-	}
+    public String afficher() {
+        if(this.isValueNull())
+            return this.getVariable();
+        else
+            return this.getValue()+"";
+    }
 	
 	@Override
 	public boolean equals(Object expr2) {
