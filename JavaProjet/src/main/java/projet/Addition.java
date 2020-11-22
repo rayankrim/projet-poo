@@ -56,7 +56,8 @@ public class Addition extends OperationBinaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Multiplication droite) {
-		return new Multiplication(gauche, new Multiplication(gauche, droite.eaRight).simplifier());
+		
+		return isNeutre(gauche, droite);
 	}
 
 	@Override
@@ -76,13 +77,27 @@ public class Addition extends OperationBinaire {
 		}
 		return new ConstEntiere(gauche.getValue() + droite.getEntier()).simplifier();
 	}
-
+	
 	@Override
 	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
 		if (gauche.getEntier() == 0) {
 			return droite;
 		}
 		return new ConstEntiere(gauche.getEntier() + droite.getValue()).simplifier();
+	}
+	
+
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere gauche, ExpressionArithmetique droite) {
+		if (gauche.getEntier() == 0) {
+			return droite;
+		}
+		return droite;
+	}
+	
+	@Override
+	public ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite) {
+		return isNeutre(gauche,droite);
 	}
 	
 	
@@ -125,6 +140,7 @@ public class Addition extends OperationBinaire {
 		
 		
 	}
+
 	
 	
 

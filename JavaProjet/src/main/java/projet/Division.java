@@ -47,6 +47,9 @@ public class Division extends OperationBinaire {
 	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
 		return isNeutre(gauche, droite);
 	}
+	
+	
+	
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VarSymbolique droite) {
@@ -69,7 +72,7 @@ public class Division extends OperationBinaire {
 
 	@Override
 	public String afficher() {
-		return eaLeft.afficher() + "/" + eaRight.afficher();
+		return "("+ eaLeft.afficher() + "/" + eaRight.afficher() + ")";
 	}
 
 	
@@ -99,6 +102,18 @@ public class Division extends OperationBinaire {
 		return false; 
 		
 		
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere gauche, ExpressionArithmetique droite) {
+		
+		return null;
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite) {
+		
+		return null;
 	}
 
 }

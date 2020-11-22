@@ -310,7 +310,7 @@ public class AppTest {
 
 		Polynome poly1 = new Polynome(nombre1, nombre2, nombre3, cinqx, dix);
 		//assertEquals()
-		
+		System.out.println((poly1.derivation(3).afficher()));
 	}
 	
 	
@@ -418,6 +418,31 @@ public class AppTest {
 		
 		
 	}
+	
+	
+	@Test
+	public void question_19() {
+		//3x^2
+		ExpressionArithmetique trois = new ConstEntiere(3);
+		ExpressionArithmetique deux = new ConstEntiere(2);
+		ExpressionArithmetique vs = new VarSymbolique("x");
+		ExpressionArithmetique p1 = new Puissance(vs,deux);
+		ExpressionArithmetique mult1 = new Multiplication(trois,p1);
+		//5x
+		ExpressionArithmetique cinq = new ConstEntiere(5);
+		ExpressionArithmetique mult2 = new Multiplication(cinq,vs);
+		//10
+		ExpressionArithmetique dix = new ConstEntiere(10);
+		
+		//test 
+		
+		Polynome poly1 = new Polynome(mult1, mult2, dix);
+		//System.out.println((poly1.derivation(0)));
+		
+		System.out.println((poly1.primitiver(1).afficher()));
+		
+	}
+
 	
 	
 	

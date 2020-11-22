@@ -35,6 +35,7 @@ public class Puissance extends OperationBinaire {
 		int simp = (int) Math.pow(gauche.getEntier(), droite.getEntier());
 		return new ConstEntiere(simp).simplifier();
 	}
+	
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
@@ -106,7 +107,19 @@ public class Puissance extends OperationBinaire {
 		if (eaRight == new ConstEntiere(1)) {
 			return eaLeft.afficher();
 		}
-		return this.eaLeft.afficher() + "^" + this.eaRight.afficher();
+		return "("+ this.eaLeft.afficher() + "^" + this.eaRight.afficher()+")";
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere gauche, ExpressionArithmetique droite) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

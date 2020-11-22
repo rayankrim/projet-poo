@@ -64,7 +64,7 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 	protected ExpressionArithmetique simplifie(Exponentielle gauche, ConstEntiere droite) {
 		return this;
 	}
-	
+
 	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstRationnelle droite) {
 		return this;
 	}
@@ -72,14 +72,32 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 	protected ExpressionArithmetique simplifie(Sin gauche, ConstEntiere droite) {
 		return this;
 	}
-	
+
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Sin droite) {
 		return this;
 	}
-	
+
+	protected ExpressionArithmetique simplifie(Multiplication gauche, ConstEntiere droite) {
+
+		return this;
+	}
+
 	public abstract ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite);
+	
+	
 
 	public abstract ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite);
+
+	public abstract ExpressionArithmetique isNeutre(ConstEntiere gauche, ExpressionArithmetique droite);
+	
+	public abstract ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite);
+	
+
+
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Division droite) {
+
+		return this;
+	}
 
 	@Override
 	public ExpressionArithmetique simplifier() {
@@ -156,16 +174,25 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 			ConstEntiere gauche = (ConstEntiere) this.eaLeft;
 			Multiplication droite = (Multiplication) this.eaRight;
 			res = simplifie(gauche, droite);
-		
+
 		} else if (this.eaLeft instanceof Sin && this.eaRight instanceof ConstEntiere) {
-		Sin gauche = (Sin) this.eaLeft;
-		ConstEntiere droite = (ConstEntiere) this.eaRight;
-		res = simplifie(gauche, droite);
-		}
-		else if (this.eaLeft instanceof ConstEntiere && this.eaRight instanceof Sin) {
-		ConstEntiere gauche = (ConstEntiere) this.eaLeft;
-		Sin droite = (Sin) this.eaRight;
-		res = simplifie(gauche, droite);
+			Sin gauche = (Sin) this.eaLeft;
+			ConstEntiere droite = (ConstEntiere) this.eaRight;
+			res = simplifie(gauche, droite);
+		} else if (this.eaLeft instanceof ConstEntiere && this.eaRight instanceof Sin) {
+			ConstEntiere gauche = (ConstEntiere) this.eaLeft;
+			Sin droite = (Sin) this.eaRight;
+			res = simplifie(gauche, droite);
+
+		} else if (this.eaLeft instanceof ConstEntiere && this.eaRight instanceof Division) {
+			ConstEntiere gauche = (ConstEntiere) this.eaLeft;
+			Division droite = (Division) this.eaRight;
+			res = simplifie(gauche, droite);
+
+		} else if (this.eaLeft instanceof Multiplication && this.eaRight instanceof ConstEntiere) {
+			Multiplication gauche = (Multiplication) this.eaLeft;
+			ConstEntiere droite = (ConstEntiere) this.eaRight;
+			res = simplifie(gauche, droite);
 		}
 
 		else {
@@ -182,5 +209,4 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 	}
 
 	
-
 }
