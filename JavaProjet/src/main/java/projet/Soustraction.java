@@ -8,7 +8,7 @@ public class Soustraction extends OperationBinaire {
 	}
 
 	@Override
-	public double calculer(){
+	public double calculer() {
 
 		double approximation = this.eaLeft.calculer() - this.eaRight.calculer();
 
@@ -43,11 +43,59 @@ public class Soustraction extends OperationBinaire {
 	}
 
 	@Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
-		return false;
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
+		return isNeutre(gauche, droite);
 	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VarSymbolique droite) {
+		return isNeutre(gauche, droite);
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
+		if (droite.getEntier() == 0) {
+			return gauche;
+		}
+		return new ConstEntiere(gauche.getValue() - droite.getEntier()).simplifier();
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
+		return new ConstEntiere(gauche.getEntier() - droite.getValue()).simplifier();
+	}
+
+	@Override
+	public boolean equals(Object expr2) {
+		if (this == expr2) {
+			return true;
+
+		}
+
+		if (expr2 == null) {
+			return false;
+		}
+
+		if (getClass() != expr2.getClass()) {
+
+			return false;
+
+		}
+		int comparaison = ((Soustraction) expr2).afficher().compareTo(this.afficher());
+		
+		if(comparaison == 0) {
+			return true; 
+		}
+		return false; 
+		
+		
+	}
+
 	@Override
 	public String afficher() {
-		return eaLeft.afficher() + "-" + eaRight.afficher();
+		return "(" + eaLeft.afficher() + "-" + eaRight.afficher() + ")";
 	}
+
+	
+
 }

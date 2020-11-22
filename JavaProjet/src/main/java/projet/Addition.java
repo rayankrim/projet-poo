@@ -2,20 +2,22 @@
 package projet;
 
 public class Addition extends OperationBinaire {
+	
 
 	public Addition(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
 		super(eaLeft, eaRight);
 
 	}
-	
-	@Override
-	public double calculer() {
-		return this.eaLeft.calculer() + this.eaRight.calculer();
-	}
 
 	@Override
-    protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ExpressionArithmetique droite) {
-		 return super.simplifie(gauche, droite);
+	public double calculer() {
+
+		double approximation = this.eaLeft.calculer() + this.eaRight.calculer();
+
+		approximation = Math.round(approximation * 10000);
+
+		return approximation / 10000;
+
 	}
 
 	@Override
@@ -38,31 +40,92 @@ public class Addition extends OperationBinaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstRationnelle droite) {
+
 		return simplifie(droite, gauche).simplifier();
 	}
-	
+
 	@Override
-	protected ExpressionArithmetique simplifie(VarSymbolique gauche, VarSymbolique droite) {
-		if(gauche.isValueNull()==false && droite.isValueNull()==false)
-			return new ConstEntiere(gauche.getValue() + droite.getValue()).simplifier();
-		else if(gauche.isValueNull()==false && droite.isValueNull())
-			return gauche.simplifier();
-		else if(gauche.isValueNull() && droite.isValueNull()==false)
-			return droite.simplifier();
-		else
-			return this;
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Addition droite) {
+		return new Addition(new Addition(gauche, droite.eaLeft).simplifier(), droite.eaRight);
 	}
-	
+
+	@Override
+	protected ExpressionArithmetique simplifie(Addition gauche, ConstEntiere droite) {
+		return new Addition(gauche.eaRight, new Addition(gauche.eaLeft, droite).simplifier());
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Multiplication droite) {
+		return new Multiplication(gauche, new Multiplication(gauche, droite.eaRight).simplifier());
+	}
+
 	@Override
 	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
-		return this;
-			
+		return isNeutre(gauche, droite);
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere eaLeft, VarSymbolique droite) {
+		return isNeutre(eaLeft, droite);
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
+		if (droite.getEntier() == 0) {
+			return gauche;
+		}
+		return new ConstEntiere(gauche.getValue() + droite.getEntier()).simplifier();
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
+		if (gauche.getEntier() == 0) {
+			return droite;
+		}
+		return new ConstEntiere(gauche.getEntier() + droite.getValue()).simplifier();
 	}
 	
+	
+
 	@Override
 	public String afficher() {
-		// TODO Auto-generated method stub
-		return this.eaLeft.afficher()+"+"+this.eaRight.afficher();
+		
+		return "(" + eaLeft.afficher() + "+" + eaRight.afficher() + ")";
+
 	}
+	
+
+	@Override
+	public boolean equals(Object expr2) {
+		
+		
+
+		if (this == expr2) {
+			return true;
+
+		}
+
+		if (expr2 == null) {
+			return false;
+		}
+
+		if (getClass() != expr2.getClass()) {
+
+			return false;
+
+		}
+		
+		int comparaison2 = ((Addition) expr2).afficher().compareTo(this.afficher());
+		
+		
+		if(comparaison2 == 0) {
+			return true; 
+		}
+		return false; 
+		
+		
+	}
+	
+	
 
 }

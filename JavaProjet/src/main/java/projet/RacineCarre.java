@@ -45,11 +45,43 @@ public class RacineCarre extends OperationUnaire {
 	}
 
 	@Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
-		return false;
+	public boolean equals(Object expr2) {
+		if (this == expr2) {
+			return true;
+
+		}
+
+		if (expr2 == null) {
+			return false;
+		}
+
+		if (getClass() != expr2.getClass()) {
+
+			return false;
+
+		}
+		int comparaison = ((RacineCarre) expr2).afficher().compareTo(this.afficher());
+		
+		if(comparaison == 0) {
+			return true; 
+		}
+		return false; 
+		
+		
 	}
+
 	@Override
 	public String afficher() {
 		return "√" + ea.afficher();
 	}
+
+	
+	//non utilisé car il n'y pas d'élément neutre dans une racine carrée
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere ce) {
+		return null;
+	}
+
+	
+
 }

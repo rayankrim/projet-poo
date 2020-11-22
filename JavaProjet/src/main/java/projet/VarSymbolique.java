@@ -4,61 +4,79 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public final class VarSymbolique implements ExpressionArithmetique {
+
 	private final String variable;
-    private ExpressionArithmetique value;
+	private ExpressionArithmetique value;
 
-
-    public VarSymbolique(String variable) {
-        Map<String,String> tableauAssociatifVarS = new TreeMap<String,String>();
-        tableauAssociatifVarS.put("x","x");
-        tableauAssociatifVarS.put("y","y");
-        tableauAssociatifVarS.put("z","z");
-        tableauAssociatifVarS.put("alpha","alpha");
-        tableauAssociatifVarS.put("i","i");
-     //   tableauAssociatifVarS.put("i2","i2");
-        this.variable = tableauAssociatifVarS.get(variable);
-    }
-    
-    public String getVariable() {
-        return this.variable;
-    }
-    
-    public int getValue() {
-    	if(isValueNull())
-    		throw new RuntimeException("Impossible de donner la valeur d'un x qui n'a pas de valeur.");
-    	else
-    		return (int) this.value.calculer();
-    }
-   
-    public void setValue(int nb) {
-    	this.value= new ConstEntiere(nb);
-    }
-    
-    @Override
-    public ExpressionArithmetique simplifier() {
-        return this;
-    }
-
-    public boolean isValueNull() {
-    	return this.value==null ? true:false;
-    }
-      
-    @Override
-    public double calculer() {
-    	if(isValueNull())
-    		throw new RuntimeException("Impossible de calculer une varibale symbolique qui n'a pas de valeur.");
-    	else
-    		return this.value.calculer();
-    	
-    }
-
-    
-    @Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
-		// TODO Auto-generated method stub
-		return false;
+	public VarSymbolique(String variable) {
+		Map<String, String> tableauAssociatifVarS = new TreeMap<String, String>();
+		tableauAssociatifVarS.put("x", "x");
+		tableauAssociatifVarS.put("y", "y");
+		tableauAssociatifVarS.put("z", "z");
+		tableauAssociatifVarS.put("a", "a");
+		tableauAssociatifVarS.put("i","i");
+		this.variable = tableauAssociatifVarS.get(variable);
 	}
-    
+
+	public String getVariable() {
+		return this.variable;
+	}
+
+	public int getValue() {
+		if (isValueNull())
+			throw new RuntimeException("Impossible de donner la valeur d'un x qui n'a pas de valeur.");
+		else
+			return (int) this.value.calculer();
+	}
+
+	public void setValue(int nb) {
+		this.value = new ConstEntiere(nb);
+	}
+
+	@Override
+	public ExpressionArithmetique simplifier() {
+		return this;
+	}
+
+	public boolean isValueNull() {
+		return this.value == null ? true : false;
+	}
+
+	@Override
+	public double calculer() {
+		if (isValueNull())
+			throw new RuntimeException("Impossible de calculer un x qui n'a pas de valeur.");
+		else
+			return this.value.calculer();
+
+	}
+	
+	@Override
+	public boolean equals(Object expr2) {
+		if (this == expr2) {
+			return true;
+
+		}
+
+		if (expr2 == null) {
+			return false;
+		}
+
+		if (getClass() != expr2.getClass()) {
+
+			return false;
+
+		}
+		int comparaison = ((VarSymbolique) expr2).afficher().compareTo(this.afficher());
+		
+		if(comparaison == 0) {
+			return true; 
+		}
+		return false; 
+		
+		
+	}
+	
 	@Override
 	public String afficher() {
 		if(this.isValueNull())
@@ -66,18 +84,5 @@ public final class VarSymbolique implements ExpressionArithmetique {
 		else
 			return this.getValue()+"";
 	}
-
-/*
-    public static void main (String [] args) throws RuntimeException{
-    	ExpressionArithmetique vs=new VarSymbolique('x');
-    	ExpressionArithmetique cinq= new ConstEntiere(5);
-    	ConstEntiere Cinq= (ConstEntiere) cinq;
-    	VarSymbolique Vs= (VarSymbolique) vs;
-    	//Vs.modifierVariable(Cinq.getEntier());
-    	System.out.println(Vs.getValue());
-    	System.out.println(Vs.getVariable());
-    	System.out.println(Vs.calculer());
-    }
-    */
 
 }

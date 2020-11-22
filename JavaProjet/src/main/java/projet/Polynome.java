@@ -1,146 +1,147 @@
 package projet;
 
-import java.util.Scanner;// pq déclarer ça si on ne l'utilise pas ? pour des tests perso ?
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Polynome implements ExpressionArithmetique {
 
-	private int nbMembre;
-	private int[] fonction = new int[10];
-	private int[] puissance = new int[10];
-	private int[] fonctionDerivee = new int[10];
-	private int[] puissanceDerivee = new int[10];
-
-	// contruscteur vide pr kinani
-
-	public Polynome() {
-
+	public ArrayList<ExpressionArithmetique> getListe() {
+		return liste;
 	}
 
-	// Constructeur de la classe Polynome
+	private final ArrayList<ExpressionArithmetique> liste = new ArrayList<ExpressionArithmetique>();
 
-	public Polynome(int nbMembre, int fonction[], int puissance[]) {
+	// constructeur EA
+	public Polynome(ExpressionArithmetique... ea) {
 
-		this.nbMembre = nbMembre;
-
-		for (int i = 0; i < nbMembre; i++) {
-			this.fonction[i] = fonction[i];
-		}
-		for (int i = 0; i < nbMembre; i++) {
-			this.puissance[i] = puissance[i];
-		}
-
-	}
-
-	public void derive() {
-
-		for (int i = 0; i < nbMembre; i++) {
-
-			// premier cas ou la puissance = 0
-
-			if (puissance[i] == 0) {
-
-				fonctionDerivee[i] = 0;
-				puissanceDerivee[i] = 0;
-
-			}
-
-			// second cas ou la puissance == 1
-
-			if (puissance[i] == 1) {
-
-				fonctionDerivee[i] = fonction[i];
-				puissanceDerivee[i] = 0;
-
-			}
-
-			// dernier cas, Px > 1
-
-			if (puissance[i] > 1) {
-
-				fonctionDerivee[i] = fonction[i] * puissance[i];
-				puissanceDerivee[i] = puissance[i] - 1;
-
-			}
+		for (ExpressionArithmetique membre : ea) {
+			liste.add(membre);
 
 		}
+		Collections.reverse(liste);
 
 	}
-
-	public void affiche() {
-
-		System.out.println("");
-
-		System.out.print("affiche de la fonction : ");
-
-		// affichage
-
-		for (int i1 = 0; i1 < nbMembre; i1++) {
-
-			if (fonction[i1] == 0) {
-				System.out.print(fonction[i1]);
-			}
-
-			if (fonction[i1] > 0) {
-				System.out.print(fonction[i1]);
-			}
-
-			if (puissance[i1] == 1) {
-				System.out.print("x ");
-
-			}
-
-			if (puissance[i1] > 1) {
-				System.out.print("x^" + puissance[i1]);
-
-			}
-
-			if (i1 != nbMembre - 1) {
-				System.out.print(" + ");
-			}
-
-		}
-
-	}
-
-	public Polynome getFonctionDerivee() {
-
-		Polynome poly = new Polynome(this.nbMembre, this.fonctionDerivee, this.puissanceDerivee);
-
-		return poly;
-
-	}
-
 	/*
-	 * public void auto() {
+	 * public Polynome(ExpressionArithmetique ea,ExpressionArithmetique
+	 * ea2,ExpressionArithmetique ea3,ExpressionArithmetique
+	 * ea4,ExpressionArithmetique ea5) { this.ea=ea; this.ea=ea2; this.ea=ea3;
+	 * this.ea=ea4; this.ea=ea5; }
 	 * 
-	 * System.out.println("tu veux deriver cb de fois? ");
-	 * 
-	 * for() .derive();
-	 * 
-	 * }
 	 */
 
-	@Override
-	public ExpressionArithmetique simplifier() {
-		// TODO Auto-generated method stub
-		return null;
+	public ExpressionArithmetique deriveMembre(ExpressionArithmetique ea) {
+
+		if (ea instanceof Multiplication) {
+
+			Multiplication m1 = (Multiplication) ea;
+			ConstEntiere membre1 = (ConstEntiere) m1.eaLeft;
+
+			if (m1.eaRight instanceof Puissance) {
+
+				Puissance xPuissance = (Puissance) m1.eaRight;
+
+				VarSymbolique vs = (VarSymbolique) xPuissance.eaLeft;
+
+				ConstEntiere puissance = (ConstEntiere) xPuissance.eaRight;
+
+				if (puissance.getEntier() >= 1) {
+
+					return new Multiplication(new Multiplication(membre1, puissance).simplifier(),
+							new Puissance(vs, new ConstEntiere(puissance.getEntier() - 1))).simplifier();
+
+				} else {
+					return new Multiplication(new Multiplication(membre1, puissance).simplifier(), vs);
+
+				}
+
+			}
+
+			else {
+
+				return membre1;
+			}
+
+		} else {
+
+			return new ConstEntiere(0);
+
+		}
+
 	}
 
-	@Override
-	public double calculer() {
-		// TODO Auto-generated method stub
-		return 0;
+	public ExpressionArithmetique derivation(int nbDerivation) {
+
+		ArrayList<ExpressionArithmetique> listeDerivation = liste;
+
+		for (int i = 0; i < nbDerivation; i++) {
+			for (int j = 0; j < listeDerivation.size(); j++) {
+
+				listeDerivation.set(j, deriveMembre(listeDerivation.get(j)));
+
+			}
+
+		}
+		ConstEntiere zero = new ConstEntiere(0);
+		Addition add = new Addition(zero, zero);
+
+		for (int j = 0; j < listeDerivation.size(); j++) {
+
+			ExpressionArithmetique intermediaire = add.simplifier();
+
+			Addition add2 = new Addition(listeDerivation.get(j), intermediaire);
+			add = add2;
+
+		}
+
+		return add.simplifier();
 	}
 
+
 	@Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean equals(Object expr2) {
+		if (this == expr2) {
+			return true;
+
+		}
+
+		if (expr2 == null) {
+			return false;
+		}
+
+		if (getClass() != expr2.getClass()) {
+
+			return false;
+
+		}
+		int comparaison = ((Polynome) expr2).afficher().compareTo(this.afficher());
+		
+		if(comparaison == 0) {
+			return true; 
+		}
+		return false; 
+		
+		
 	}
 
+	//non utilisées car les polynomes sont composés de multiplication et d'addition 
+	
 	@Override
 	public String afficher() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.getListe()+"";
 	}
+	
+	@Override
+	public ExpressionArithmetique simplifier() { 
+		return this;
+	}
+
+
+	@Override
+	public double calculer() { 
+		return 0;
+	}
+	
+
+
 }

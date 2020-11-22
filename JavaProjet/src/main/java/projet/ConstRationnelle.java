@@ -2,10 +2,6 @@ package projet;
 
 public final class ConstRationnelle implements ExpressionArithmetique {
 
-
-	private final int numerateur;
-	private final int denominateur;
-
 	@Override
 	public String toString() {
 		return "ConstRationnelle [numerateur=" + numerateur + ", denominateur=" + denominateur + "]";
@@ -14,7 +10,6 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 	public ConstRationnelle(int num, int denom) {
 		this.numerateur = num;
 		this.denominateur = denom;
-		
 	}
 
 	public int getNumerateur() {
@@ -25,14 +20,13 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 		return denominateur;
 	}
 
+	private final int numerateur;
+	private final int denominateur;
+
 	@Override
 	public ExpressionArithmetique simplifier() {
-		if(this.denominateur==0)
-			throw new RuntimeException("Impossible de mettre 0 en dénominateur. Réessayer");
-		else {
-			int pgcd = gcd(this.numerateur, this.denominateur);
-			return new ConstRationnelle(this.numerateur / pgcd, this.denominateur / pgcd);
-		}
+		int pgcd = gcd(this.numerateur, this.denominateur);
+		return new ConstRationnelle(this.numerateur / pgcd, this.denominateur / pgcd);
 	}
 
 	private static int gcd(int a, int b) {
@@ -44,25 +38,49 @@ public final class ConstRationnelle implements ExpressionArithmetique {
 
 	@Override
 	public double calculer() {
-		if(this.denominateur==0)
-			throw new RuntimeException("Impossible de mettre 0 en dénominateur. Réessayer");
-		else {
-			int a=  getNumerateur();
-			int b = getDenominateur();
-			return (double) a /b ;
+		int a = getNumerateur();
+		int b = getDenominateur();
+
+		return (double) a / b;
+	}
+
+	@Override
+	public boolean equals(Object expr2) {
+
+		if (this == expr2) {
+			return true;
+
 		}
-	}
 
-	@Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		if (expr2 == null) {
+			return false;
+		}
 
-	@Override
+		if (getClass() != expr2.getClass()) {
+
+			return false;
+
+		}
+		
+		int comparaison = ((ConstRationnelle) expr2).afficher().compareTo(this.afficher());
+		
+		if(comparaison == 0) {
+			return true; 
+		}
+		return false; 
+		
+		
+	}
+	
+
+	
+	
 	public String afficher() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        if (numerateur == denominateur) {
+        return ""+numerateur;
+    }
+        return "(" + numerateur + "/" + denominateur + ")";
+
+}
 
 }

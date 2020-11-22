@@ -138,5 +138,17 @@ public class Produit extends OperationBinaire{
 		return result;
 	}
 
+	@Override
+	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

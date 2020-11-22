@@ -3,7 +3,7 @@ package projet;
 public final class ConstEntiere implements ExpressionArithmetique {
 
 	private final int entier;
-	
+
 	public ConstEntiere(int value) {
 		this.entier = value;
 	}
@@ -23,13 +23,31 @@ public final class ConstEntiere implements ExpressionArithmetique {
 	}
 
 	@Override
-	public boolean egaliteAr(ExpressionArithmetique expr2) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean equals(Object obj) {
+
+		if (this == obj) {
+
+			return true;
+
+		}
+
+		if (obj == null) {
+			return false;
+			
+		}
+
+		if (getClass() != obj.getClass()) {
+
+			return false;
+
+		}
+		return ((ConstEntiere) obj).getEntier() == this.getEntier();
 	}
 
 	@Override
 	public String afficher() {
-		return this.getEntier() + "";
+		return Integer.toString(this.getEntier());
 	}
+
+	
 }
