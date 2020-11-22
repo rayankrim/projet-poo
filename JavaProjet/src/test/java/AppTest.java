@@ -31,8 +31,6 @@ import projet.RacineCarre;
  * Unit test for simple App.
  */
 public class AppTest {
-	
-	
 
 	@Test
 	public void simpleSum() {
@@ -123,6 +121,18 @@ public class AppTest {
 		
 	}
 	
+	@Test
+	public void question_5() {
+		ExpressionArithmetique un = new ConstEntiere(1);
+		ExpressionArithmetique x = new VarSymbolique("x");
+		ExpressionArithmetique unQuart = new ConstRationnelle(1,4);
+		ExpressionArithmetique troisQuart = new ConstRationnelle(3,4);
+		
+		ExpressionArithmetique noeud1 = new Addition(unQuart,troisQuart);
+		ExpressionArithmetique noeud2 = new Addition(noeud1,x);
+		
+		assertEquals("(1+x)",noeud2.simplifier().afficher());
+	}
 	
 	@Test
 	public void question_6() {
@@ -479,8 +489,6 @@ public class AppTest {
 		
 		
 	}
-	
-	
 	
 	
 
