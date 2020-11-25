@@ -45,7 +45,9 @@ public class Division extends OperationBinaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
-		return isNeutre(gauche, droite);
+		if(gauche.isValueNull() == false) {
+			return new ConstRationnelle(gauche.getValue(), droite.getEntier()).simplifier();		}
+		return this.isNeutre();
 	}
 	
 	@Override
@@ -57,26 +59,23 @@ public class Division extends OperationBinaire {
 		return this.simplifier();
 	}
 	
-	
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VarSymbolique droite) {
-		return isNeutre(gauche, droite);
-	}
-
-	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
-		return this;
-	}
-
-	@Override
-	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
-		if (droite.getEntier() == 1) {
-			return gauche;
+		if (droite.isValueNull() == false) {
+			return new ConstRationnelle(gauche.getEntier(), droite.getValue()).simplifier();
 		}
-		return new ConstRationnelle(gauche.getValue(), droite.getEntier()).simplifier();
-
+		return this.isNeutre();
 	}
+
+	@Override
+    public ExpressionArithmetique isNeutre() {
+        if (this.eaRight.equals(new ConstEntiere(1))){
+            return this.eaLeft;
+        }
+        return this;
+
+    }
 
 	@Override
 	public String afficher() {
@@ -110,18 +109,6 @@ public class Division extends OperationBinaire {
 		return false; 
 		
 		
-	}
-
-	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere gauche, ExpressionArithmetique droite) {
-		
-		return null;
-	}
-
-	@Override
-	public ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite) {
-		
-		return null;
 	}
 
 }

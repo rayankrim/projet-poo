@@ -14,7 +14,7 @@ public class Sin extends OperationUnaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere nb) {
-		return isNeutre(nb);
+		return this.isNeutre();
 	}
 	
 	@Override
@@ -58,20 +58,21 @@ public class Sin extends OperationUnaire {
 		
 		
 	}
+	
+	@Override
+    public ExpressionArithmetique isNeutre() {
+        if(this.ea.equals(new ConstEntiere(0))) {
+            return new ConstEntiere(0);
+        }
+        return this;
+    } 
 
 	@Override
 	public String afficher() {
 		return "sin(" + ea.afficher() + ")";
 	}
 
-	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere ce) {
-		if(ce.getEntier()== 0) {
-			
-			return new ConstEntiere(0);
-		}
-		return new Sin(ce);
-	}
+
 
 	
 

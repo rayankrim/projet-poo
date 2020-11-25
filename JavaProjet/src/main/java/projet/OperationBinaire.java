@@ -82,13 +82,13 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 		return this;
 	}
 
-	public abstract ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite);
 
-	public abstract ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite);
+    protected ExpressionArithmetique simplifie(VarSymbolique gauche, VarSymbolique droite) {
 
-	public abstract ExpressionArithmetique isNeutre(ConstEntiere gauche, ExpressionArithmetique droite);
+        return this;
+    }
+ 
 
-	public abstract ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite);
 
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ExpressionArithmetique droite) {
 		return this;
@@ -104,6 +104,7 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 		return this;
 	}
 
+	public abstract ExpressionArithmetique isNeutre();
 
 	@Override
 	public ExpressionArithmetique simplifier() {
@@ -209,7 +210,6 @@ public abstract class OperationBinaire implements ExpressionArithmetique {
 			ExpressionArithmetique droite = (ExpressionArithmetique) this.eaRight;
 			res = simplifie(gauche, droite);
 		}
-
 		else {
 			res = this;
 		}

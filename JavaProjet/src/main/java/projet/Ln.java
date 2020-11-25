@@ -41,34 +41,35 @@ public class Ln extends OperationUnaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ExpressionArithmetique nb) {
-		// TODO Auto-generated method stub
-		return super.simplifie(nb);
+		return this.simplifier();
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere nb) {
 		
-		return isNeutre(nb);
+		return this.isNeutre();
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstRationnelle nb) {
-		// TODO Auto-generated method stub
-		return super.simplifie(nb);
+		return this.simplifier();
 	}
 
+
+
+	@Override
+    public ExpressionArithmetique isNeutre() {
+
+        if ( this.ea.equals(new ConstEntiere(1)) ) {
+            return new ConstEntiere(0);
+        }else if (this.ea.equals(new ConstEntiere(0))) {
+            throw new RuntimeException("Impossible de calculer ln(0)"); 
+        }
+        return this;
+    } 
+	
 	@Override
 	public String afficher() {
 		return "ln(" + ea.afficher() + ")";
 	}
-
-	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere ce) {
-		if (ce.getEntier() == 1) {
-			return new ConstEntiere(0);
-
-		}
-		return new Ln(ce);
-	}
-
 }

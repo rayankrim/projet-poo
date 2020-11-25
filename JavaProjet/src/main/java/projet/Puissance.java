@@ -24,12 +24,6 @@ public class Puissance extends OperationBinaire {
 		return new ConstRationnelle(num, deno).simplifier();
 	}
 
-	/*
-	 * @Override protected ExpressionArithmetique simplifie(ConstRationnelle gauche,
-	 * ConstRationnelle droite) {
-	 * 
-	 * return new ConstRationnelle(num,deno).simplifier(); }
-	 */
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ConstEntiere droite) {
 		int simp = (int) Math.pow(gauche.getEntier(), droite.getEntier());
@@ -45,31 +39,24 @@ public class Puissance extends OperationBinaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VarSymbolique droite) {
-		return isNeutre(gauche, droite);
+		return this.isNeutre();
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
-		return isNeutre(gauche, droite);
+		return this.isNeutre();
 	}
 
+	
 	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
-		return this;
-	}
-
-	@Override
-	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
-		if (droite.getEntier() == 1 && gauche.isValueNull() == true) {
-			return new VarSymbolique(gauche.getVariable());
-		} else if (droite.getEntier() == 0 && gauche.isValueNull() == true) {
-			return new ConstEntiere(1);
-		} else if (gauche.isValueNull() == true) {
-			return this;
-		}
-		int simp = (int) Math.pow(gauche.getValue(), droite.getEntier());
-		return new ConstEntiere(simp).simplifier();
-	}
+    public ExpressionArithmetique isNeutre() {
+        if (this.eaRight.equals(new ConstEntiere(1))){
+            return this.eaLeft;
+        }else if (this.eaRight.equals(new ConstEntiere(0))){
+            return new ConstEntiere(1);
+        }
+        return this;
+    }
 
 	@Override
 	public ExpressionArithmetique simplifier() {
@@ -109,19 +96,6 @@ public class Puissance extends OperationBinaire {
 		}
 		return "("+ this.eaLeft.afficher() + "^" + this.eaRight.afficher()+")";
 	}
-
-	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere gauche, ExpressionArithmetique droite) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
 
 }

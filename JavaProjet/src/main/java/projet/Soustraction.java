@@ -44,27 +44,22 @@ public class Soustraction extends OperationBinaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
-		return isNeutre(gauche, droite);
+		return this.isNeutre();
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VarSymbolique droite) {
-		return isNeutre(gauche, droite);
+		return this.isNeutre();
 	}
 
 	@Override
-	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
-		if (droite.getEntier() == 0) {
-			return gauche;
-		}
-		return new ConstEntiere(gauche.getValue() - droite.getEntier()).simplifier();
-	}
-
-	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
-		return new ConstEntiere(gauche.getEntier() - droite.getValue()).simplifier();
-	}
-
+    public ExpressionArithmetique isNeutre() {
+        if(this.eaRight.equals(new ConstEntiere(0)) ) {
+            return this.eaLeft;
+        }
+        return this;
+    }
+	
 	@Override
 	public boolean equals(Object expr2) {
 		if (this == expr2) {
@@ -94,18 +89,6 @@ public class Soustraction extends OperationBinaire {
 	@Override
 	public String afficher() {
 		return "(" + eaLeft.afficher() + "-" + eaRight.afficher() + ")";
-	}
-
-	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere gauche, ExpressionArithmetique droite) {
-		
-		return null;
-	}
-
-	@Override
-	public ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite) {
-		
-		return null;
 	}
 
 	

@@ -33,38 +33,16 @@ public class Multiplication extends OperationBinaire {
 		return new Multiplication(gauche, droite).simplifier();
 	}
 
-	@Override
-	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
-		if (droite.getEntier() == 1) {
-			return new VarSymbolique(gauche.getVariable());
-		} else if (droite.getEntier() == 0) {
-			return new ConstEntiere(droite.getEntier());
-		}
-		return new ConstEntiere(gauche.getValue() * droite.getEntier()).simplifier();
-	}
-
-	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
-		if (gauche.getEntier() == 1) {
-			return new VarSymbolique(droite.getVariable());
-		} else if (gauche.getEntier() == 0) {
-			return new ConstEntiere(gauche.getEntier());
-		} else if (droite.isValueNull()) {
-
-			return this;
-		}
-		return new ConstEntiere(gauche.getEntier() * droite.getValue()).simplifier();
-	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
-		return isNeutre(gauche, droite);
+		return this.isNeutre();
 
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, VarSymbolique droite) {
-		return isNeutre(gauche, droite);
+		return this.isNeutre();
 	}
 
 	@Override
@@ -79,42 +57,46 @@ public class Multiplication extends OperationBinaire {
 				new Multiplication(gauche, droite.eaRight).simplifier()).simplifier();
 	}
 
-	@Override
-	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, VarSymbolique droite) {
-		return super.simplifie(gauche, droite);
-	}
-
-	@Override
-	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstRationnelle droite) {
-		return super.simplifie(gauche, droite);
-	}
+    protected ExpressionArithmetique simplifie(VarSymbolique gauche, VarSymbolique droite) {
+        return this;
+    }
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Multiplication droite) {
-		return new Multiplication(new Multiplication(gauche, droite.eaLeft).simplifier(), droite.eaRight).simplifier();
+		return new Multiplication(new Multiplication(gauche, droite.eaLeft).simplifier(), droite.eaRight).isNeutre().simplifier();
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Division droite) {
 		return new Division(new Multiplication(gauche, droite.eaLeft).simplifier(), droite.eaRight).simplifier();
 	}
+	
+	@Override
+    protected ExpressionArithmetique simplifie(ConstRationnelle gauche, VarSymbolique droite) {
+        return this.isNeutre();
+    }
+
+    @Override
+    protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstRationnelle droite) {
+        return this.isNeutre();
+    }
 
 	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere gauche, ExpressionArithmetique droite) {
-		if (gauche.getEntier() == 1) {
-			return droite;
-		}
-		return this.simplifier();
-	}
+    public ExpressionArithmetique isNeutre() {
 
-	@Override
-	public ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite) {
-		if (droite.getEntier() == 1) {
-			return gauche;
-		}
-		return this.simplifier();
-
-	}
+        if(this.eaLeft.equals(new ConstEntiere(0))) {
+            return new ConstEntiere(0);
+        }else if(this.eaRight.equals(new ConstEntiere(0)) ) {
+            return new ConstEntiere(0);
+        }
+        else if(this.eaRight.equals(new ConstEntiere(1))|| this.eaRight.equals(new ConstRationnelle(1,1))  ) {
+            return this.eaLeft;
+        }else if(this.eaLeft.equals(new ConstEntiere(1)) || this.eaLeft.equals(new ConstRationnelle(1,1))) {
+        	return this.eaRight;
+        }
+        
+        return this;
+    }
 
 	@Override
 	public double calculer() {

@@ -76,10 +76,10 @@ public class RacineCarre extends OperationUnaire {
 	}
 
 	
-	//non utilisÃ© car il n'y pas d'Ã©lÃ©ment neutre dans une racine carrÃ©e
+	//non utilisé car il n'y pas d'élément neutre dans une racine carrÃ©e
 	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere ce) {
-		return null;
+	public ExpressionArithmetique isNeutre() {
+		return this;
 	}
 
 	

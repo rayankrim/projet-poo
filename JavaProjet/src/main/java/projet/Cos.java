@@ -4,17 +4,17 @@ public class Cos extends OperationUnaire {
 
 	@Override
 	protected ExpressionArithmetique simplifie(ExpressionArithmetique nb) {
-		return super.simplifie(nb);
+		return this;
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere nb) {
-		return super.simplifie(nb);
+		return this.isNeutre();
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstRationnelle nb) {
-		return super.simplifie(nb);
+		return this;
 	}
 
 	public Cos(ExpressionArithmetique ea) {
@@ -61,15 +61,13 @@ public class Cos extends OperationUnaire {
 		return "cos(" + ea.afficher() + ")";
 	}
 
-
 	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere ce) {
-		
-		
-		
-		return null;
-	}
-
+    public ExpressionArithmetique isNeutre() {
+        if (this.ea.equals(new ConstEntiere(0)) ) {
+            return new ConstEntiere(1);
+        }
+        return this;
+    }
 
 	
 

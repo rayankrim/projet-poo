@@ -8,7 +8,7 @@ public abstract class OperationUnaire implements ExpressionArithmetique {
 		this.ea = ea;
 	}
 
-	public abstract ExpressionArithmetique isNeutre(ConstEntiere ce);
+	public abstract ExpressionArithmetique isNeutre();
 	
 	
 	protected ExpressionArithmetique simplifie(ExpressionArithmetique nb) {

@@ -4,6 +4,7 @@ package projet;
 public class Addition extends OperationBinaire {
 	
 
+
 	public Addition(ExpressionArithmetique eaLeft, ExpressionArithmetique eaRight) {
 		super(eaLeft, eaRight);
 
@@ -57,67 +58,56 @@ public class Addition extends OperationBinaire {
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, Multiplication droite) {
 		
-		return isNeutre(gauche, droite);
+		return this.isNeutre();
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstEntiere droite) {
-		return isNeutre(gauche, droite);
+		if(gauche.isValueNull() == false) {
+			return new ConstEntiere(gauche.getValue() + droite.getEntier()).simplifier();
+		}
+		return this.isNeutre();
 	}
 
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere eaLeft, VarSymbolique droite) {
-		return isNeutre(eaLeft, droite);
+		if (droite.isValueNull() == false) {
+			return new ConstEntiere(droite.getValue() + eaLeft.getEntier()).simplifier();
+		}
+		return this.isNeutre();
 	}
 	
 	@Override
 	protected ExpressionArithmetique simplifie(ConstEntiere gauche, ExpressionArithmetique droite) {
-		return isNeutre(gauche,droite);
+		return this.isNeutre();
 	}
 	
 	@Override
 	protected ExpressionArithmetique simplifie(ExpressionArithmetique gauche, ConstEntiere droite) {
-		return isNeutre(gauche,droite);
-	}
-
-	@Override
-	public ExpressionArithmetique isNeutre(VarSymbolique gauche, ConstEntiere droite) {
-		if (droite.getEntier() == 0) {
-			return gauche;
-		}
-		return new ConstEntiere(gauche.getValue() + droite.getEntier()).simplifier();
-	}
-	
-	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere gauche, VarSymbolique droite) {
-		if (gauche.getEntier() == 0) {
-			return droite;
-		}
-		return new ConstEntiere(gauche.getEntier() + droite.getValue()).simplifier();
+		return this.isNeutre();
 	}
 	
 
 	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere gauche, ExpressionArithmetique droite) {
-		if (gauche.getEntier() == 0) {
-			return droite;
-		}
-		return this;
+	protected ExpressionArithmetique simplifie(ConstRationnelle gauche, VarSymbolique droite) {
+		return super.simplifie(gauche, droite);
 	}
-	
-	
+
+	@Override
+	protected ExpressionArithmetique simplifie(VarSymbolique gauche, ConstRationnelle droite) {
+		return super.simplifie(gauche, droite);
+	}
+
 	
 	@Override
-	public ExpressionArithmetique isNeutre(ExpressionArithmetique gauche, ConstEntiere droite) {
-		
-		if(droite.getEntier() == 0 ) {
-			
-			return gauche; 
-		}
-		
-		return this;
-	}
-	
+    public ExpressionArithmetique isNeutre() { 
+        if(this.eaLeft.equals(new ConstEntiere(0))) {
+            return this.eaRight;
+        }else if(this.eaRight.equals(new ConstEntiere(0)) ) {
+            return this.eaLeft;
+        }
+        return this;
+    }
 	
 
 	@Override

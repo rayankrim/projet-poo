@@ -13,8 +13,32 @@ public class Exponentielle extends OperationUnaire {
 
 		return Math.exp(this.ea.calculer());
 	}
+	
 
-	// simplifier
+	@Override
+	protected ExpressionArithmetique simplifie(ExpressionArithmetique nb) {
+		return this.simplifier();
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstEntiere nb) {
+		
+		return this.isNeutre();
+	}
+
+	@Override
+	protected ExpressionArithmetique simplifie(ConstRationnelle nb) {
+		return this.simplifier();
+	}
+	
+	@Override
+    public ExpressionArithmetique isNeutre() {
+    if(this.ea.equals(new ConstEntiere(0))) {
+        return new ConstEntiere(1);
+    }
+    return this;
+
+    }
 
 	@Override
 	public boolean equals(Object expr2) {
@@ -48,31 +72,6 @@ public class Exponentielle extends OperationUnaire {
 	}
 	
 
-	@Override
-	protected ExpressionArithmetique simplifie(ExpressionArithmetique nb) {
-		// TODO Auto-generated method stub
-		return super.simplifie(nb);
-	}
-
-	@Override
-	protected ExpressionArithmetique simplifie(ConstEntiere nb) {
-		
-		return isNeutre(nb);
-	}
-
-	@Override
-	protected ExpressionArithmetique simplifie(ConstRationnelle nb) {
-		// TODO Auto-generated method stub
-		return super.simplifie(nb);
-	}
 
 
-	@Override
-	public ExpressionArithmetique isNeutre(ConstEntiere ce) {
-	if(ce.getEntier() == 0) {
-		
-		return new ConstEntiere(1);
-	}
-	return new Exponentielle(ce);
-		
-	}}
+}
