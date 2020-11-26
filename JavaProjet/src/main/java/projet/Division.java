@@ -64,7 +64,6 @@ public class Division extends OperationBinaire {
 			return gauche;
 		}
 		return new ConstRationnelle(gauche.getValue(), droite.getEntier()).simplifier();
-
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package projet;
 import java.util.Map;
 import java.util.TreeMap;
 
-public final class VarSymbolique implements ExpressionArithmetique {
+public class VarSymbolique implements ExpressionArithmetique {
 
 	private final String variable;
 	private ExpressionArithmetique value;

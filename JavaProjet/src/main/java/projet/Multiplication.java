@@ -51,7 +51,6 @@ public class Multiplication extends OperationBinaire {
 			return new ConstEntiere(gauche.getEntier());
 		}
 		else if(droite.isValueNull()) {
-			
 			return this; 
 		}
 		return new ConstEntiere(gauche.getEntier() * droite.getValue()).simplifier();

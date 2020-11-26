@@ -132,7 +132,7 @@ public class AppTest {
 		ExpressionArithmetique noeud2 = new Addition(noeud1,x);
 	
 		System.out.println(noeud2.simplifier().afficher());
-	//	assertEquals("(1+x)",noeud2.simplifier().afficher());
+		assertEquals("(1+x)",noeud2.simplifier().afficher());
 	}
 	
 	@Test
@@ -330,6 +330,7 @@ public class AppTest {
 		ExpressionArithmetique sum= new Somme(multi,max);
 		
 		String sum2="a(0)*x^0+a(1)*x^1+a(2)*x^2+a(3)*x^3+a(4)*x^4";
+		System.out.println(sum.simplifier().afficher());
 		assertEquals(sum2,sum.simplifier().afficher());
 	}
 	
